@@ -1,4 +1,7 @@
-- name: Install latest version of tomcat7
-  apt:
-    name: tomcat7
-    state: latest
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install latest version of nginx
+    apt:
+      name: nginx
+      state: latest
