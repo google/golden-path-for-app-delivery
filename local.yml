@@ -1,0 +1,4 @@
+- name: Install latest version of tomcat7
+  apt:
+    name: tomcat7
+    state: latest
