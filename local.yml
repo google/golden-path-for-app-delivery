@@ -1,5 +1,4 @@
 - hosts: all
-  become: yes
   tasks:
   - name: Install latest version of nginx
     apt:
