@@ -1,13 +1,15 @@
-imageTag = viglesiasce/sample-app
+imageRepo = viglesiasce/sample-app
+imageTag = v0.1.0
+image = $(imageRepo):$(imageTag)
 
 all: build test push
 PHONY: all
 
 build:
-	docker build -t $(imageTag) .
+	docker build -t $(image) .
 
 test:
-	docker run $(imageTag) go test
+	docker run $(image) go test
 
 push:
-	gcloud docker -- push $(imageTag)
+	gcloud docker -- push $(image)
