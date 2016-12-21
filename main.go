@@ -51,16 +51,12 @@ func main() {
           panic(err)
         }
         version = string(version_bytes)
-	showversion := flag.Bool("version", false, "display version")
 	frontend := flag.Bool("frontend", false, "run in frontend mode")
 	port := flag.Int("port", 8080, "port to bind")
 	backend := flag.String("backend-service", "http://127.0.0.1:8081", "hostname of backend server")
 	flag.Parse()
 
-	if *showversion {
-		fmt.Printf("Version %s\n", version)
-		return
-	}
+        fmt.Printf("Version %s\n", version)
 
 	http.HandleFunc("/version", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "%s\n", version)
