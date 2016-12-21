@@ -1,6 +1,9 @@
 imageRepo = viglesiasce/sample-app
-imageTag = v0.1
-minorVersion = 1
+versionFile = VERSION
+majorVersion = $(shell awk 'BEGIN {FS="."}; {print $$1}' $(versionFile))
+minorVersion = $(shell awk 'BEGIN {FS="."}; {print $$2}' $(versionFile))
+subMinorVersion = $(shell awk 'BEGIN {FS="."}; {print $$3}' $(versionFile))
+imageTag = v$(majorVersion).$(minorVersion)
 image = $(imageRepo):$(imageTag)
 
 all: build test push
@@ -8,12 +11,12 @@ PHONY: all
 
 build:
 	docker build -t $(image) .
-	docker tag $(image) $(image).$(minorVersion)
+	docker tag $(image) $(image).$(subMinorVersion)
 
-test:
+test: build
 	docker run $(image) go test
 
 push:
 	gcloud docker -- push $(image)
-	gcloud docker -- push $(image).$(minorVersion)
+	gcloud docker -- push $(image).$(subMinorVersion)
 	echo IMAGE=$(image) > image.properties
