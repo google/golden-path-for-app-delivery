@@ -11,12 +11,13 @@ PHONY: all
 
 build:
 	docker build -t $(image) .
-	docker tag $(image) $(image).$(subMinorVersion)
+	gcloud docker -- push $(image)
 
 test: build
 	docker run $(image) go test
 
-push:
+push: build
+	docker tag $(image) $(image).$(subMinorVersion)
 	gcloud docker -- push $(image)
 	gcloud docker -- push $(image).$(subMinorVersion)
 	echo IMAGE=$(image) > image.properties
