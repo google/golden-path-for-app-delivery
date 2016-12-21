@@ -8,7 +8,7 @@ PHONY: all
 
 build:
 	docker build -t $(image) .
-	docker tag $(image) $(image).$(minorVersion) .
+	docker tag $(image) $(image).$(minorVersion)
 
 test:
 	docker run $(image) go test
