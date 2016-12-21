@@ -13,4 +13,4 @@ test:
 
 push:
 	gcloud docker -- push $(image)
-	echo IMAGE=$(image) > properties
+	echo IMAGE=$(image) > image.properties
