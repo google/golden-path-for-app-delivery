@@ -13,4 +13,8 @@
 
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM golang:1.6.3-onbuild
+FROM golang:1.9
+COPY . /go/src/app
+RUN go get -v
+RUN go build
+CMD ['app']
