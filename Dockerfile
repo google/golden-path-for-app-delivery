@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 FROM golang:1.9
-COPY . /go/src/app
+WORKDIR /go/src/app
+COPY . .
 RUN go get -v
-RUN go build
-CMD ['app']
+RUN go build -v
+CMD ['./app']
