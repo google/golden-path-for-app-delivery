@@ -18,6 +18,9 @@ metadata:
   name: gceme-backend-dev
 spec:
   replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
   template:
     metadata:
       name: backend
@@ -31,14 +34,16 @@ spec:
         image: IMAGE_NAME
         resources:
           limits:
-            memory: "500Mi"
-            cpu: "100m"
-        imagePullPolicy: Always
+            memory: "512Mi"
+            cpu: "1"
+        imagePullPolicy: IfNotPresent
         readinessProbe:
           httpGet:
             path: /healthz
             port: 8080
-        command: ["./app", "-port=8080"]
+        command: ["./app"]
+        args:
+          - "-port=8080"
         ports:
         - name: backend
           containerPort: 8080
