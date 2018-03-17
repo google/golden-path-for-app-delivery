@@ -13,9 +13,10 @@
 
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM golang:1.9
+FROM golang:1.10
 WORKDIR /go/src/app
-COPY . .
-RUN go get -v
-RUN go build -v
+RUN go get -u github.com/derekparker/delve/cmd/dlv
+COPY vendor/ vendor/
+COPY VERSION main.go html.go ./
+RUN go build -gcflags='-N -l' -v
 CMD ['./app']
