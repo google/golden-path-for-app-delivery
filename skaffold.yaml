@@ -1,23 +1,17 @@
-apiVersion: skaffold/v1
+apiVersion: skaffold/v1alpha2
 kind: Config
 build:
-  tagPolicy: sha256
+  tagPolicy:
+    sha256: {}
   artifacts:
   - imageName: gcr.io/vic-goog/sample-app-backend
-    workspace: .
+    workspace: cmd/backend
   - imageName: gcr.io/vic-goog/sample-app-frontend
-    workspace: .
-  local: {}
+    workspace: cmd/frontend
 deploy:
   kubectl:
     manifests:
-    - paths:
       - k8s/dev/backend-dev.yaml
       - k8s/services/backend.yaml
-      parameters:
-        IMAGE_NAME: gcr.io/vic-goog/sample-app-backend
-    - paths:
       - k8s/dev/frontend-dev.yaml
       - k8s/services/frontend.yaml
-      parameters:
-        IMAGE_NAME: gcr.io/vic-goog/sample-app-frontend
