@@ -1,0 +1,5 @@
+bases:
+  - k8s/base
+patches:
+  - k8s/dev/backend.yaml
+  - k8s/dev/frontend.yaml

@@ -48,7 +48,7 @@ const (
 	  <td>{{.Version}}</td>
 	</tr>
 	<tr>
-	  <td>ID</td>
+	  <td>Instance ID</td>
 	  <td>{{.ID}}</td>
 	</tr>
 	<tr>
@@ -84,17 +84,13 @@ const (
 <table class="bordered">
   <tbody>
 	<tr>
-	  <td>Address</td>
-	  <td>{{.ClientIP}}</td>
+	  <td>Request Headers</td>
+	  <td><pre>{{.LBRequest}}</pre></td>
 	</tr>
 	<tr>
-	  <td>Request</td>
-	  <td>{{.LBRequest}}</td>
+		<td>Error</td>
+		<td>{{.Error}}</td>
 	</tr>
-<tr>
-  <td>Error</td>
-  <td>{{.Error}}</td>
-</tr>
 </tbody>
 </table>
 </div>

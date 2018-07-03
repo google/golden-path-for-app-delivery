@@ -1,16 +1,21 @@
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
-  name: gceme-frontend-dev
+  name: gceme-frontend
 spec:
-  replicas: 1
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gceme
+      role: frontend
+      env: prod
   template:
     metadata:
       name: frontend
       labels:
         app: gceme
         role: frontend
-        env: dev
+        env: prod
     spec:
       containers:
       - name: frontend
@@ -24,9 +29,9 @@ spec:
           value: v1.0.1
         resources:
           limits:
-            memory: "500Mi"
-            cpu: "100m"
-        imagePullPolicy: Always
+            memory: "1000Mi"
+            cpu: "500m"
+        imagePullPolicy: IfNotPresent
         readinessProbe:
           httpGet:
             path: /healthz

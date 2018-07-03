@@ -19,40 +19,40 @@ type InstanceMetadata struct {
 	Error      string
 }
 
-type assigner struct {
-	err error
-}
-
-func (a *assigner) assign(getVal func() (string, error)) string {
-	if a.err != nil {
-		return ""
-	}
-	s, err := getVal()
-	if err != nil {
-		a.err = err
-	}
-	return s
-}
-
 // New creates a new instance with info filled out
-func (i InstanceMetadata) Populate(version string) InstanceMetadata {
+func (i *InstanceMetadata) Populate(version string) {
+	var err error
 	if !metadata.OnGCE() {
 		i.Error = "Not running on GCE"
-		return i
 	}
 
-	a := &assigner{}
-	i.ID = a.assign(metadata.InstanceID)
-	i.Zone = a.assign(metadata.Zone)
-	i.Name = a.assign(metadata.InstanceName)
-	i.Hostname = a.assign(metadata.Hostname)
-	i.Project = a.assign(metadata.ProjectID)
-	i.InternalIP = a.assign(metadata.InternalIP)
-	i.ExternalIP = a.assign(metadata.ExternalIP)
+	i.ID, err = metadata.InstanceID()
+	if err != nil {
+		i.Error += "Unable to populate InstanceID\n"
+	}
+	i.Zone, err = metadata.Zone()
+	if err != nil {
+		i.Error += "Unable to populate Zone\n"
+	}
+	i.Name, err = metadata.InstanceName()
+	if err != nil {
+		i.Error += "Unable to populate Instance Name\n"
+	}
+	i.Hostname, err = metadata.Hostname()
+	if err != nil {
+		i.Error += "Unable to populate Hostname\n"
+	}
+	i.Project, err = metadata.ProjectID()
+	if err != nil {
+		i.Error += "Unable to populate Project\n"
+	}
+	i.InternalIP, err = metadata.InternalIP()
+	if err != nil {
+		i.Error += "Unable to populate InternalIP\n"
+	}
+	i.ExternalIP, err = metadata.ExternalIP()
+	if err != nil {
+		i.Error += "Unable to populate ExternalIP\n"
+	}
 	i.Version = version
-
-	if a.err != nil {
-		i.Error = a.err.Error()
-	}
-	return i
 }

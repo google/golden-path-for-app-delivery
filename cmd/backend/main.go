@@ -20,9 +20,9 @@ func main() {
 
 	log.Printf("Backend version: %s\n", version)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("Received request from %s", r.RemoteAddr)
-		var i InstanceMetadata
-		i = i.Populate(version)
+		log.Printf("Received request from %s at %s", r.RemoteAddr, r.URL.EscapedPath())
+		i := InstanceMetadata{}
+		i.Populate(version)
 		raw, _ := httputil.DumpRequest(r, true)
 		i.LBRequest = string(raw)
 		resp, _ := json.Marshal(i)

@@ -34,7 +34,7 @@ func main() {
 	req.Close = false
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("Received request from %s", r.RemoteAddr)
+		log.Printf("Received request from %s at %s", r.RemoteAddr, r.URL.EscapedPath())
 		resp, err := client.Do(req)
 		if err != nil {
 			w.WriteHeader(http.StatusServiceUnavailable)

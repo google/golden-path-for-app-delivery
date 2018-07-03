@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: gceme-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gceme
+      role: frontend
+      env: dev
+  template:
+    metadata:
+      labels:
+        env: dev
+    spec:
+      containers:
+      - name: frontend
+        env:
+        - name: VERSION
+          value: dev
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+

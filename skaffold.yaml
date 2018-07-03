@@ -9,9 +9,10 @@ build:
   - imageName: gcr.io/vic-goog/sample-app-frontend
     workspace: cmd/frontend
 deploy:
-  kubectl:
-    manifests:
-      - k8s/dev/backend-dev.yaml
-      - k8s/services/backend.yaml
-      - k8s/dev/frontend-dev.yaml
-      - k8s/services/frontend.yaml
+  kustomize: {}
+  # kubectl:
+  #   manifests:
+  #     - k8s/dev/backend-dev.yaml
+  #     - k8s/services/backend.yaml
+  #     - k8s/dev/frontend-dev.yaml
+  #     - k8s/services/frontend.yaml

@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: gceme-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gceme
+      role: backend
+      env: prod
+  template:
+    metadata:
+      name: backend
+      labels:
+        app: gceme
+        role: backend
+        env: prod
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/vic-goog/sample-app-backend
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: "1"
+        env:
+        - name: VERSION
+          value: v1.0.1
+        imagePullPolicy: IfNotPresent
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        ports:
+        - name: backend
+          containerPort: 8080
