@@ -19,7 +19,7 @@ type InstanceMetadata struct {
 	Error      string
 }
 
-// New creates a new instance with info filled out
+// Populate creates a new instance with info filled out
 func (i *InstanceMetadata) Populate(version string) {
 	var err error
 	if !metadata.OnGCE() {
