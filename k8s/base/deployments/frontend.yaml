@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/vic-goog/sample-app-frontend
+        image: gcr.io/vic-cd-demo/sample-app-backend
         command:
         - /go/src/frontend/frontend
         args:

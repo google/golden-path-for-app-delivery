@@ -6,8 +6,6 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gceme
-      role: frontend
       env: dev
   template:
     metadata:
@@ -16,6 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
+        image: gcr.io/vic-cd-demo/sample-app-frontend
         env:
         - name: VERSION
           value: dev
