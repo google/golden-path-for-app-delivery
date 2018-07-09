@@ -1,0 +1,39 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build-frontend'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/sample-app-frontend', 'cmd/frontend']
+  waitFor: ['-']
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'build-backend'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/sample-app-backend', 'cmd/backend']
+  waitFor: ['-']
+- name: 'gcr.io/$PROJECT_ID/sample-app-frontend'
+  id: 'test-frontend'
+  waitFor: ['build-frontend']
+  entrypoint: 'go'
+  args: ['test']
+  dir: '/go/src/frontend'
+- name: 'gcr.io/$PROJECT_ID/sample-app-backend'
+  id: 'test-backend'
+  waitFor: ['build-backend']
+  entrypoint: 'go'
+  args: ['test']
+  dir: '/go/src/backend'
+- name: 'gcr.io/$PROJECT_ID/kustomize'
+  id: 'create-production-yaml'
+  waitFor: ['test-frontend', 'test-backend']
+  entrypoint: 'sh'
+  args:
+  - -c
+  - |
+     /kustomize build k8s/production > production.yaml
+- name: 'gcr.io/cloud-builders/gsutil'
+  id: 'upload-production-yaml'
+  waitFor: ['create-production-yaml']
+  args:
+  - cp
+  - production.yaml
+  - gs://vic-cd-demo-k8s-yaml/production.yaml
+images:
+- 'gcr.io/$PROJECT_ID/sample-app-frontend'
+- 'gcr.io/$PROJECT_ID/sample-app-backend'
