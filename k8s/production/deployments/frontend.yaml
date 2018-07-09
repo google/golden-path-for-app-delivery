@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: gceme-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: production
+  template:
+    metadata:
+      labels:
+        env: production
+    spec:
+      containers:
+      - name: frontend
+        image: gcr.io/vic-cd-demo/sample-app-frontend
+        env:
+        - name: VERSION
+          value: production
+        resources:
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"
+        imagePullPolicy: Always
+
