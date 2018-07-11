@@ -34,6 +34,21 @@ steps:
   - cp
   - production.yaml
   - gs://vic-cd-demo-k8s-yaml/production.yaml
+- name: 'gcr.io/$PROJECT_ID/kustomize'
+  id: 'create-staging-yaml'
+  waitFor: ['test-frontend', 'test-backend']
+  entrypoint: 'sh'
+  args:
+  - -c
+  - |
+     /kustomize build k8s/staging > staging.yaml
+- name: 'gcr.io/cloud-builders/gsutil'
+  id: 'upload-staging-yaml'
+  waitFor: ['create-staging-yaml']
+  args:
+  - cp
+  - staging.yaml
+  - gs://vic-cd-demo-k8s-yaml/staging.yaml
 images:
 - 'gcr.io/$PROJECT_ID/sample-app-frontend'
 - 'gcr.io/$PROJECT_ID/sample-app-backend'
