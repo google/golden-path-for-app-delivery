@@ -9,4 +9,5 @@ build:
   - imageName: gcr.io/vic-cd-demo/sample-app-frontend-dev
     workspace: cmd/frontend
 deploy:
-  kustomize: {}
+  kustomize:
+    kustomizePath: k8s/dev/

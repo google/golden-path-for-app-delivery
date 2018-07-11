@@ -1,6 +1,0 @@
-bases:
-  - k8s/base
-patches:
-  - k8s/dev/deployments/backend.yaml
-  - k8s/dev/deployments/frontend.yaml
-  - k8s/dev/services/frontend.yaml
