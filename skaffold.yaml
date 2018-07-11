@@ -4,9 +4,9 @@ build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - imageName: gcr.io/vic-cd-demo/sample-app-backend
+  - imageName: gcr.io/vic-cd-demo/sample-app-backend-dev
     workspace: cmd/backend
-  - imageName: gcr.io/vic-cd-demo/sample-app-frontend
+  - imageName: gcr.io/vic-cd-demo/sample-app-frontend-dev
     workspace: cmd/frontend
 deploy:
   kustomize: {}

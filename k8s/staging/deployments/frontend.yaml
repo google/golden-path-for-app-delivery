@@ -1,20 +1,19 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: gceme-backend
+  name: gceme-frontend
 spec:
+  replicas: 3
   selector:
     matchLabels:
-      env: dev
+      env: staging
   template:
     metadata:
-      name: backend
       labels:
-        env: dev
+        env: staging
     spec:
       containers:
-      - name: backend
-        image: gcr.io/vic-cd-demo/sample-app-backend-dev
+      - name: frontend
         env:
         - name: VERSION
-          value: dev
+          value: staging

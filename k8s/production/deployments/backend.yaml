@@ -6,8 +6,6 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: gceme
-      role: backend
       env: production
   template:
     metadata:
@@ -17,7 +15,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: gcr.io/vic-cd-demo/sample-app-backend
         resources:
           limits:
             memory: "1024Mi"
@@ -25,4 +22,3 @@ spec:
         env:
         - name: VERSION
           value: production
-        imagePullPolicy: Always

@@ -1,0 +1,5 @@
+bases:
+  - ../production
+patches:
+  - deployments/backend.yaml
+  - deployments/frontend.yaml

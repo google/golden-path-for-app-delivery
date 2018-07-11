@@ -3,36 +3,37 @@ apiVersion: apps/v1
 metadata:
   name: gceme-frontend
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: gceme
       role: frontend
-      env: prod
+      env: base
   template:
     metadata:
       name: frontend
       labels:
         app: gceme
         role: frontend
-        env: prod
+        env: base
     spec:
       containers:
       - name: frontend
-        image: gcr.io/vic-cd-demo/sample-app-backend
+        image: gcr.io/vic-cd-demo/sample-app-frontend
         command:
         - /go/src/frontend/frontend
         args:
         - -backend-service=http://gceme-backend:8080
         env:
         - name: VERSION
-          value: v1.0.1
+          value: base
         resources:
           limits:
-            memory: "1000Mi"
+            memory: "512Mi"
             cpu: "500m"
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         readinessProbe:
+          initialDelaySeconds: 1
+          periodSeconds: 1
           httpGet:
             path: /healthz
             port: 80

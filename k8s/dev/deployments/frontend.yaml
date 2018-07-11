@@ -3,7 +3,6 @@ apiVersion: apps/v1
 metadata:
   name: gceme-frontend
 spec:
-  replicas: 1
   selector:
     matchLabels:
       env: dev
@@ -14,13 +13,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/vic-cd-demo/sample-app-frontend
+        image: gcr.io/vic-cd-demo/sample-app-frontend-dev
         env:
         - name: VERSION
           value: dev
-        resources:
-          limits:
-            memory: "500Mi"
-            cpu: "100m"
-        imagePullPolicy: Always
-
