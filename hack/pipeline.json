@@ -1,0 +1,234 @@
+{
+    "expectedArtifacts": [
+      {
+        "defaultArtifact": {
+          "kind": "default.gcs",
+          "name": "gs://vic-cd-demo-k8s-yaml/production.yaml",
+          "reference": "gs://vic-cd-demo-k8s-yaml/production.yaml",
+          "type": "gcs/object"
+        },
+        "id": "f5c8639c-3acc-4653-9b4e-fad353a79dbc",
+        "matchArtifact": {
+          "kind": "gcs",
+          "name": "gs://vic-cd-demo-k8s-yaml/production.yaml",
+          "type": "gcs/object"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "kind": "default.docker",
+          "name": "gcr.io/vic-cd-demo/sample-app-frontend",
+          "reference": "gcr.io/vic-cd-demo/sample-app-frontend:latest",
+          "type": "docker/image",
+          "version": "latest"
+        },
+        "id": "d72a407d-617e-47c0-a95d-05c67f9131f5",
+        "matchArtifact": {
+          "kind": "docker",
+          "name": "gcr.io/vic-cd-demo/sample-app-frontend",
+          "type": "docker/image"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "kind": "default.docker",
+          "name": "gcr.io/vic-cd-demo/sample-app-frontend",
+          "reference": "gcr.io/vic-cd-demo/sample-app-frontend:latest",
+          "type": "docker/image",
+          "version": "latest"
+        },
+        "id": "7959335c-0766-42e4-8528-196a3f7dfcbc",
+        "matchArtifact": {
+          "kind": "docker",
+          "name": "gcr.io/vic-cd-demo/sample-app-backend",
+          "type": "docker/image"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      },
+      {
+        "defaultArtifact": {
+          "kind": "default.gcs",
+          "name": "gs://vic-cd-demo-k8s-yaml/staging.yaml",
+          "reference": "gs://vic-cd-demo-k8s-yaml/staging.yaml",
+          "type": "gcs/object"
+        },
+        "id": "f01e4c24-5b45-4665-924f-1ed53331f89c",
+        "matchArtifact": {
+          "kind": "gcs",
+          "name": "gs://vic-cd-demo-k8s-yaml/staging.yaml",
+          "type": "gcs/object"
+        },
+        "useDefaultArtifact": true,
+        "usePriorArtifact": true,
+        "usePriorExecution": false
+      }
+    ],
+    "keepWaitingPipelines": true,
+    "lastModifiedBy": "viglesias@google.com",
+    "limitConcurrent": true,
+    "parameterConfig": [],
+    "stages": [
+      {
+        "account": "production",
+        "cloudProvider": "kubernetes",
+        "manifestArtifactAccount": "gcs",
+        "manifestArtifactId": "f5c8639c-3acc-4653-9b4e-fad353a79dbc",
+        "manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "labels": {
+                "app": "nginx"
+              },
+              "name": "nginx-deployment"
+            },
+            "spec": {
+              "replicas": 3,
+              "selector": {
+                "matchLabels": {
+                  "app": "nginx"
+                }
+              },
+              "template": {
+                "metadata": {
+                  "labels": {
+                    "app": "nginx"
+                  }
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "image": "nginx:1.7.9",
+                      "name": "nginx",
+                      "ports": [
+                        {
+                          "containerPort": 80
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "moniker": {
+          "app": "test"
+        },
+        "name": "Deploy Production",
+        "refId": "1",
+        "relationships": {
+          "loadBalancers": [],
+          "securityGroups": []
+        },
+        "requiredArtifactIds": [
+          "d72a407d-617e-47c0-a95d-05c67f9131f5",
+          "7959335c-0766-42e4-8528-196a3f7dfcbc"
+        ],
+        "requisiteStageRefIds": [
+          "3"
+        ],
+        "source": "artifact",
+        "type": "deployManifest"
+      },
+      {
+        "account": "staging",
+        "cloudProvider": "kubernetes",
+        "manifestArtifactAccount": "gcs",
+        "manifestArtifactId": "f01e4c24-5b45-4665-924f-1ed53331f89c",
+        "manifests": [
+          {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+              "labels": {
+                "app": "nginx"
+              },
+              "name": "nginx-deployment"
+            },
+            "spec": {
+              "replicas": 3,
+              "selector": {
+                "matchLabels": {
+                  "app": "nginx"
+                }
+              },
+              "template": {
+                "metadata": {
+                  "labels": {
+                    "app": "nginx"
+                  }
+                },
+                "spec": {
+                  "containers": [
+                    {
+                      "image": "nginx:1.7.9",
+                      "name": "nginx",
+                      "ports": [
+                        {
+                          "containerPort": 80
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "moniker": {
+          "app": "test"
+        },
+        "name": "Deploy Staging",
+        "refId": "2",
+        "relationships": {
+          "loadBalancers": [],
+          "securityGroups": []
+        },
+        "requiredArtifactIds": [
+          "d72a407d-617e-47c0-a95d-05c67f9131f5",
+          "7959335c-0766-42e4-8528-196a3f7dfcbc"
+        ],
+        "requisiteStageRefIds": [],
+        "source": "artifact",
+        "type": "deployManifest"
+      },
+      {
+        "failPipeline": true,
+        "judgmentInputs": [],
+        "name": "Manual Judgment",
+        "notifications": [],
+        "refId": "3",
+        "requisiteStageRefIds": [
+          "2"
+        ],
+        "type": "manualJudgment"
+      }
+    ],
+    "triggers": [
+      {
+        "attributeConstraints": {},
+        "enabled": true,
+        "expectedArtifactIds": [
+          "d72a407d-617e-47c0-a95d-05c67f9131f5",
+          "7959335c-0766-42e4-8528-196a3f7dfcbc"
+        ],
+        "payloadConstraints": {
+          "digest": "gcr.io/vic-cd-demo/sample-app-frontend@.*"
+        },
+        "pubsubSystem": "google",
+        "subscriptionName": "gcr",
+        "type": "pubsub"
+      }
+    ],
+    "updateTs": "1531348561562"
+  }
