@@ -1,5 +1,6 @@
 package main
 
+// InstanceMetadata stores info about the instance this code is running on.
 type InstanceMetadata struct {
 	ID         string
 	Name       string
