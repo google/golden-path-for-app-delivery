@@ -3,4 +3,3 @@ bases:
 patches:
   - path: deployments/backend.yaml
   - path: deployments/frontend.yaml
-  - path: services/frontend.yaml
