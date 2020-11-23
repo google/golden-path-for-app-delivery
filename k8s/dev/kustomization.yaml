@@ -1,6 +1,6 @@
 bases:
   - ../base
 patches:
-  - deployments/backend.yaml
-  - deployments/frontend.yaml
-  - services/frontend.yaml
+  - path: deployments/backend.yaml
+  - path: deployments/frontend.yaml
+  - path: services/frontend.yaml
