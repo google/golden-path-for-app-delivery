@@ -36,6 +36,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: cmd/frontend
+          file: cmd/frontend/Dockerfile
           push: true
           tags: viglesiasce/sample-app-frontend:kustomize
       
@@ -45,5 +46,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: cmd/backend
+          file: cmd/backend/Dockerfile
           push: true
           tags: viglesiasce/sample-app-backend:kustomize
