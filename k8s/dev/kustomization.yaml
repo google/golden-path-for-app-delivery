@@ -1,5 +1,5 @@
 bases:
   - ../base
-patches:
-  - path: deployments/backend.yaml
-  - path: deployments/frontend.yaml
+patchesStrategicMerge:
+  - deployments/backend.yaml
+  - deployments/frontend.yaml

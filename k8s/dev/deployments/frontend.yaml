@@ -10,10 +10,12 @@ spec:
     metadata:
       labels:
         env: dev
+    
     spec:
       containers:
       - name: frontend
         image: gcr.io/vic-cd-demo/sample-app-frontend-dev
+        imagePullPolicy: IfNotPresent
         env:
         - name: VERSION
           value: dev

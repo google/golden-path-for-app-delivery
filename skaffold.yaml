@@ -1,13 +1,18 @@
-apiVersion: skaffold/v1alpha2
+apiVersion: skaffold/v2beta13
 kind: Config
 build:
+  artifacts:
+  - image: gcr.io/vic-cd-demo/sample-app-backend-dev
+    context: cmd/backend
+  - image: gcr.io/vic-cd-demo/sample-app-frontend-dev
+    context: cmd/frontend
   tagPolicy:
     sha256: {}
-  artifacts:
-  - imageName: gcr.io/vic-cd-demo/sample-app-backend-dev
-    workspace: cmd/backend
-  - imageName: gcr.io/vic-cd-demo/sample-app-frontend-dev
-    workspace: cmd/frontend
+test:
+  - image: gcr.io/vic-cd-demo/sample-app-backend-dev
+    custom:
+    - command: cd cmd/backend && go test
 deploy:
   kustomize:
-    kustomizePath: k8s/dev/
+    paths:
+    - k8s/dev/

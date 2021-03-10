@@ -1,5 +1,5 @@
 bases:
   - ../production
-patches:
+patchesStrategicMerge:
   - deployments/backend.yaml
   - deployments/frontend.yaml

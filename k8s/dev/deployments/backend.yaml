@@ -15,6 +15,7 @@ spec:
       containers:
       - name: backend
         image: gcr.io/vic-cd-demo/sample-app-backend-dev
+        imagePullPolicy: IfNotPresent
         env:
         - name: VERSION
           value: dev
