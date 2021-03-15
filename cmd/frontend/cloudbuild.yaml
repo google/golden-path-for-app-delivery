@@ -1,0 +1,6 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  id: 'test-frontend'
+  waitFor: ['-']
+  entrypoint: 'go'
+  args: ['test']

@@ -7,12 +7,17 @@ build:
     docker:
       dockerfile: test-image/Dockerfile
 test:
+  # Unit tests, remotely vis Cloud Build
   - image: gcr.io/vicnastea/sample-app-backend-dev
     custom:
-    - command: cd cmd/backend && go test
+    - command: gcloud builds submit cmd/backend --config cmd/backend/cloudbuild.yaml
   - image: gcr.io/vicnastea/sample-app-frontend-dev
     custom:
-    - command: cd cmd/frontend && go test
-  - image: test-image
+    - command: gcloud builds submit cmd/frontend --config cmd/frontend/cloudbuild.yaml
+  # Image scan locally
+  - image: gcr.io/vicnastea/sample-app-backend-dev
+    custom:
+    - command: ./hack/scan.sh $IMAGE
+  - image: gcr.io/vicnastea/sample-app-frontend-dev
     custom:
     - command: ./hack/scan.sh $IMAGE
