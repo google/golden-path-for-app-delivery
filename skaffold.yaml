@@ -1,20 +1,15 @@
 apiVersion: skaffold/v2beta13
 kind: Config
+requires:
+  - path: skaffold-test.yaml
 build:
   artifacts:
-  - image: gcr.io/vic-cd-demo/sample-app-backend-dev
+  - image: gcr.io/vicnastea/sample-app-backend-dev
     context: cmd/backend
-  - image: gcr.io/vic-cd-demo/sample-app-frontend-dev
+  - image: gcr.io/vicnastea/sample-app-frontend-dev
     context: cmd/frontend
   tagPolicy:
     sha256: {}
-test:
-  - image: gcr.io/vic-cd-demo/sample-app-backend-dev
-    custom:
-    - command: cd cmd/backend && go test
-  - image: gcr.io/vic-cd-demo/sample-app-backend-dev
-    custom:
-    - command: hack/scan.sh $IMAGE
 deploy:
   kustomize:
     paths:

@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+build:
+  artifacts:
+  - image: test-image
+    context: .
+    docker:
+      dockerfile: test-image/Dockerfile
+test:
+  - image: gcr.io/vicnastea/sample-app-backend-dev
+    custom:
+    - command: cd cmd/backend && go test
+  - image: gcr.io/vicnastea/sample-app-frontend-dev
+    custom:
+    - command: cd cmd/frontend && go test
+  - image: test-image
+    custom:
+    - command: ./hack/scan.sh $IMAGE

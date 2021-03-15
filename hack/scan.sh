@@ -1,2 +1,3 @@
 #!/bin/bash -xe
-gcloud beta artifacts docker images scan $1
+export SCAN=$(gcloud beta artifacts docker images scan $1 --format json | jq -r .response.scan)
+gcloud beta artifacts docker images list-vulnerabilities ${SCAN}

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/vic-cd-demo/sample-app-frontend-dev
+        image: gcr.io/vicnastea/sample-app-frontend-dev
         imagePullPolicy: IfNotPresent
         env:
         - name: VERSION
