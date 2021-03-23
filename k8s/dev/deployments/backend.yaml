@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: gcr.io/vicnastea/sample-app-backend-dev
+        image: sample-app-backend-dev
         imagePullPolicy: IfNotPresent
         env:
         - name: VERSION

@@ -4,9 +4,9 @@ requires:
   - path: skaffold-test.yaml
 build:
   artifacts:
-  - image: gcr.io/vicnastea/sample-app-backend-dev
+  - image: sample-app-backend-dev
     context: cmd/backend
-  - image: gcr.io/vicnastea/sample-app-frontend-dev
+  - image: sample-app-frontend-dev
     context: cmd/frontend
   tagPolicy:
     sha256: {}
