@@ -1,5 +1,5 @@
 #!/bin/bash -xe
-if [[ $(kubectl config current-context) == "minikube1" ]];then
+if [[ $(kubectl config current-context) == "minikube" ]];then
   eval $(minikube -p minikube docker-env)
 fi
 
