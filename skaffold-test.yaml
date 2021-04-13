@@ -1,19 +1,10 @@
 apiVersion: skaffold/v2beta13
 kind: Config
-build:
-  artifacts:
-  - image: test-image
-    context: .
-    docker:
-      dockerfile: test-image/Dockerfile
 test:
   # Unit tests, remotely vis Cloud Build
   - image: sample-app-backend-dev
     custom:
-    - command: gcloud builds submit cmd/backend --config cmd/backend/cloudbuild.yaml
-  - image: sample-app-frontend-dev
-    custom:
-    - command: gcloud builds submit cmd/frontend --config cmd/frontend/cloudbuild.yaml
+    - command: gcloud builds submit .
   # Image scan locally
   - image: sample-app-backend-dev
     custom:

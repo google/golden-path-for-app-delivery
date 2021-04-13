@@ -1,0 +1,19 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  id: 'test-backend'
+  waitFor: ['-']
+  entrypoint: 'sh'
+  args:
+  - -c
+  - |
+    cd cmd/backend
+    go test
+- name: 'gcr.io/cloud-builders/go'
+  id: 'test-frontend'
+  waitFor: ['-']
+  entrypoint: 'sh'
+  args:
+  - -c
+  - |
+    cd cmd/frontend
+    go test
