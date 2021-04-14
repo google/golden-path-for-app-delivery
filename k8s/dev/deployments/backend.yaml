@@ -3,6 +3,10 @@ apiVersion: apps/v1
 metadata:
   name: gceme-backend
 spec:
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       env: dev

@@ -6,8 +6,12 @@ build:
   artifacts:
   - image: sample-app-backend-dev
     context: cmd/backend
+    # buildpacks:
+    #   builder: "gcr.io/buildpacks/builder:v1"
   - image: sample-app-frontend-dev
     context: cmd/frontend
+    # buildpacks:
+    #   builder: "gcr.io/buildpacks/builder:v1"
   tagPolicy:
     sha256: {}
 deploy:

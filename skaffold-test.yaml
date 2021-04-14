@@ -1,14 +1,19 @@
 apiVersion: skaffold/v2beta13
 kind: Config
+build:
+  local:
+    useDockerCLI: true
+  artifacts:
+    - image: test-image
+      context: .
+      docker:
+        dockerfile: hack/test-image/Dockerfile
 test:
   # Unit tests, remotely vis Cloud Build
   - image: sample-app-backend-dev
     custom:
-    - command: gcloud builds submit .
-  # Image scan locally
-  - image: sample-app-backend-dev
+    - command: docker run $IMAGE go test
+  - image: test-image
     custom:
-    - command: ./hack/scan.sh $IMAGE
-  - image: sample-app-frontend-dev
-    custom:
-    - command: ./hack/scan.sh $IMAGE
+    - command: ./hack/validate.sh $IMAGE
+  

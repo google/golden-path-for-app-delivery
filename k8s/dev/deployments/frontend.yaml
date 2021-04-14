@@ -3,6 +3,10 @@ apiVersion: apps/v1
 metadata:
   name: gceme-frontend
 spec:
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
       env: dev
@@ -10,7 +14,6 @@ spec:
     metadata:
       labels:
         env: dev
-    
     spec:
       containers:
       - name: frontend
