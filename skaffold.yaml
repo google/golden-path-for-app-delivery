@@ -4,14 +4,18 @@ requires:
   - path: skaffold-test.yaml
 build:
   artifacts:
+  - image: base
+    context: base
   - image: sample-app-backend-dev
     context: cmd/backend
-    # buildpacks:
-    #   builder: "gcr.io/buildpacks/builder:v1"
+    requires:
+    - image: base
+      alias: BASE
   - image: sample-app-frontend-dev
     context: cmd/frontend
-    # buildpacks:
-    #   builder: "gcr.io/buildpacks/builder:v1"
+    requires:
+    - image: base
+      alias: BASE
   tagPolicy:
     sha256: {}
 deploy:

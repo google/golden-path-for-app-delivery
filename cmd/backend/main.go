@@ -1,36 +1,44 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
-	"fmt"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"os"
+
+	"github.com/gin-gonic/gin"
 )
 
+var version = os.Getenv("VERSION")
+
 func main() {
-	version := os.Getenv("VERSION")
-	port := 8080
+	port := ":8080"
+
 	flag.Parse()
-	http.HandleFunc("/version", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "%s\n", version)
-	})
 
+	r := gin.Default()
 	log.Printf("Backend version: %s\n", version)
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("Received request fro> %s at %s", r.RemoteAddr, r.URL.EscapedPath())
-		i := InstanceMetadata{}
-		i.Populate(version)
-		raw, _ := httputil.DumpRequest(r, true)
-		i.LBRequest = string(raw)
-		resp, _ := json.Marshal(i)
-		fmt.Fprintf(w, "%s", resp)
-	})
-	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
 
+	r.GET("/", handleIndex)
+	r.GET("/version", handleVersion)
+	r.GET("/healthz", handleHealthz)
+	r.Run(port)
+}
+
+func handleIndex(c *gin.Context) {
+	log.Printf("Received request fro> %s at %s", c.Request.RemoteAddr, c.Request.URL.EscapedPath())
+	i := InstanceMetadata{}
+	i.Populate(version)
+	raw, _ := httputil.DumpRequest(c.Request, true)
+	i.LBRequest = string(raw)
+	c.JSON(http.StatusOK, i)
+}
+
+func handleVersion(c *gin.Context) {
+	c.String(http.StatusOK, "%s", c.Value("version"))
+}
+
+func handleHealthz(c *gin.Context) {
+	c.String(http.StatusOK, "", "")
 }

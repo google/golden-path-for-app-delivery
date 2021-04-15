@@ -1,0 +1,22 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+metadata:
+  name: backend
+build:
+  artifacts:
+  - image: base
+    context: ../../base
+  - image: sample-app-backend-dev
+    requires:
+    - alias: BASE
+      image: base
+deploy:
+  kustomize:
+    paths:
+    - k8s/dev
+profiles:
+- name: prod
+  deploy:
+    kustomize:
+      paths:
+      - k8s/prod

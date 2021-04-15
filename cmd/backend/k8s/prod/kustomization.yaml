@@ -1,0 +1,4 @@
+bases:
+  - ../../../base/k8s
+patchesStrategicMerge:
+  - deployment.yaml

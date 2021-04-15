@@ -1,6 +1,0 @@
-bases:
-  - ../base
-patchesStrategicMerge:
-  - deployments/backend.yaml
-  - deployments/frontend.yaml
-  - services/frontend.yaml
