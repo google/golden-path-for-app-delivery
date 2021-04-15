@@ -1,5 +1,5 @@
 bases:
-  - ../../../base/k8s
+  - ../base
 patchesStrategicMerge:
   - deployment.yaml
   - service.yaml

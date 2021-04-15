@@ -1,24 +1,5 @@
 apiVersion: skaffold/v2beta13
 kind: Config
 requires:
-  - path: skaffold-test.yaml
-build:
-  artifacts:
-  - image: base
-    context: base
-  - image: sample-app-backend-dev
-    context: cmd/backend
-    requires:
-    - image: base
-      alias: BASE
-  - image: sample-app-frontend-dev
-    context: cmd/frontend
-    requires:
-    - image: base
-      alias: BASE
-  tagPolicy:
-    sha256: {}
-deploy:
-  kustomize:
-    paths:
-    - k8s/dev/
+- path: cmd/backend/skaffold.yaml
+- path: cmd/frontend/skaffold.yaml

@@ -6,8 +6,6 @@ requires:
   - path: ../backend
 build:
   artifacts:
-  - image: base
-    context: ../../base
   - image: sample-app-frontend-dev
     requires:
       - alias: BASE

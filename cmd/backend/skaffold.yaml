@@ -5,7 +5,7 @@ metadata:
 build:
   artifacts:
   - image: base
-    context: ../../base
+    context: ../../base-image
   - image: sample-app-backend-dev
     requires:
     - alias: BASE

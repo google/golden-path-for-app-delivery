@@ -23,7 +23,7 @@ spec:
       - name: frontend
         image: sample-app-frontend
         command:
-        - /go/src/frontend/frontend
+        - /go/src/app/app
         args:
         - -backend-service=http://gceme-backend:8080
         env:

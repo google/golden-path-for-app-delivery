@@ -1,5 +1,0 @@
-resources:
-  - services/backend.yaml
-  - services/frontend.yaml
-  - deployments/backend.yaml
-  - deployments/frontend.yaml
