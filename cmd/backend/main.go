@@ -27,7 +27,7 @@ func main() {
 }
 
 func handleIndex(c *gin.Context) {
-	log.Printf("Received request fro> %s at %s", c.Request.RemoteAddr, c.Request.URL.EscapedPath())
+	log.Printf("Received request from %s at %s", c.Request.RemoteAddr, c.Request.URL.EscapedPath())
 	i := InstanceMetadata{}
 	i.Populate(version)
 	raw, _ := httputil.DumpRequest(c.Request, true)

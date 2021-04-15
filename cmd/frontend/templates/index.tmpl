@@ -1,22 +1,4 @@
-package main
-
-// InstanceMetadata stores info about the instance this code is running on.
-type InstanceMetadata struct {
-	ID         string
-	Name       string
-	Version    string
-	Hostname   string
-	Zone       string
-	Project    string
-	InternalIP string
-	ExternalIP string
-	LBRequest  string
-	ClientIP   string
-	Error      string
-}
-
-const (
-	html = `<!doctype html>
+<!doctype html>
 <html>
 <head>
 <!-- Compiled and minified CSS -->
@@ -101,5 +83,4 @@ const (
 <div class="col s2">&nbsp;</div>
 </div>
 </div>
-</html>`
-)
+</html>
