@@ -13,5 +13,5 @@ test:
     - command: docker run $IMAGE go test
   - image: test-image
     custom:
-    - command: ./hack/validate.sh $IMAGE
+    - command: docker run $IMAGE ./hack/validate.sh
   

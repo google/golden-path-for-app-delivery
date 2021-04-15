@@ -1,4 +1,4 @@
 #!/bin/bash -xe
-
-docker run -v `pwd`:/src $1 bash -c 'kustomize build /src/k8s/dev > /src/dev.yaml'
-docker run -v `pwd`:/src $1 bash -c 'conftest test -p /src/hack/policy /src/dev.yaml'
+kustomize build cmd/frontend/k8s/prod > frontend-prod.yaml
+kustomize build cmd/backend/k8s/prod >  backend-prod.yaml
+conftest test -p hack/policy ./*-prod.yaml
