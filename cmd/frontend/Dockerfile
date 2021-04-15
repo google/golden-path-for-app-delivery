@@ -3,5 +3,6 @@ ARG SKAFFOLD_GO_GCFLAGS
 
 FROM $BASE
 COPY vendor/ vendor/
-COPY templates/ *.go go.* ./
+COPY templates/ templates/
+COPY *.go go.* ./
 RUN go build -o app

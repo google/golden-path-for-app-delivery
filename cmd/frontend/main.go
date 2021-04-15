@@ -17,7 +17,7 @@ var backend string
 func main() {
 
 	port := ":80"
-	backend = *flag.String("backend-service", "http://127.0.0.1:8080", "hostname of backend server")
+	backend = *flag.String("backend-service", "http://gceme-backend:8080", "hostname of backend server")
 	flag.Parse()
 
 	log.Printf("Frontend version: %s\n", version)
@@ -50,7 +50,7 @@ func handleIndex(c *gin.Context) {
 		c.String(http.StatusInternalServerError, "%v", err)
 		return
 	}
-	c.HTML(http.StatusOK, "index.tmpl", i)
+	c.HTML(http.StatusOK, "index.html", i)
 }
 
 func handleVersion(c *gin.Context) {

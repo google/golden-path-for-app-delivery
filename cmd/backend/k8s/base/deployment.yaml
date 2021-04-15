@@ -31,8 +31,8 @@ spec:
           value: base
         imagePullPolicy: Always
         readinessProbe:
-          initialDelaySeconds: 1
-          periodSeconds: 1
+          initialDelaySeconds: 5
+          periodSeconds: 10
           httpGet:
             path: /healthz
             port: 8080

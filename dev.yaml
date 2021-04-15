@@ -1,0 +1,124 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gceme-backend
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: gceme
+    role: backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gceme-frontend
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: gceme
+    role: frontend
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gceme-backend
+spec:
+  selector:
+    matchLabels:
+      app: gceme
+      env: dev
+      role: backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: gceme
+        env: dev
+        role: backend
+      name: backend
+    spec:
+      containers:
+      - env:
+        - name: VERSION
+          value: dev
+        image: sample-app-backend-dev
+        imagePullPolicy: IfNotPresent
+        name: backend
+        ports:
+        - containerPort: 8080
+          name: backend
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gceme-frontend
+spec:
+  selector:
+    matchLabels:
+      app: gceme
+      env: dev
+      role: frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: gceme
+        env: dev
+        role: frontend
+      name: frontend
+    spec:
+      containers:
+      - args:
+        - -backend-service=http://gceme-backend:8080
+        command:
+        - /go/src/frontend/frontend
+        env:
+        - name: VERSION
+          value: dev
+        image: sample-app-frontend-dev
+        imagePullPolicy: IfNotPresent
+        name: frontend
+        ports:
+        - containerPort: 80
+          name: frontend
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000

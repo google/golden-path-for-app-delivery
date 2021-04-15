@@ -20,3 +20,8 @@ profiles:
     kustomize:
       paths:
       - k8s/prod
+portForward:
+  - resourceType: service
+    resourceName: gceme-frontend
+    port: 80
+    localPort: 8080

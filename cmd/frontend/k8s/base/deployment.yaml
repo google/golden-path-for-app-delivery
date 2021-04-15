@@ -22,10 +22,6 @@ spec:
       containers:
       - name: frontend
         image: sample-app-frontend
-        command:
-        - /go/src/app/app
-        args:
-        - -backend-service=http://gceme-backend:8080
         env:
         - name: VERSION
           value: base
@@ -35,8 +31,8 @@ spec:
             cpu: "500m"
         imagePullPolicy: Always
         readinessProbe:
-          initialDelaySeconds: 1
-          periodSeconds: 1
+          initialDelaySeconds: 5
+          periodSeconds: 10
           httpGet:
             path: /healthz
             port: 80
