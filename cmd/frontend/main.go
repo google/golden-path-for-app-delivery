@@ -35,19 +35,19 @@ func handleIndex(c *gin.Context) {
 	// Call backend for info
 	resp, err := http.Get(backend)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "%v", err)
+		c.String(http.StatusInternalServerError, "Request to backend server ()%s failed:\n%v", backend, err)
 		return
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "%v", err)
+		c.String(http.StatusInternalServerError, "Unable to read body from backend request:\n%v", err)
 		return
 	}
 	var i InstanceMetadata
 	err = json.Unmarshal([]byte(body), &i)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "%v", err)
+		c.String(http.StatusInternalServerError, "Unable to parse JSON from backend request:\n%v", err)
 		return
 	}
 	c.HTML(http.StatusOK, "index.html", i)
