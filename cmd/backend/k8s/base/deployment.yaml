@@ -24,8 +24,8 @@ spec:
         image: sample-app-backend
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "128Mi"
+            cpu: "250m"
         env:
         - name: VERSION
           value: base

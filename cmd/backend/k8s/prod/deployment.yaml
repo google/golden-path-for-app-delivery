@@ -17,8 +17,8 @@ spec:
       - name: backend
         resources:
           limits:
-            memory: "1024Mi"
-            cpu: "1000m"
+            memory: "512Mi"
+            cpu: "500m"
         env:
         - name: VERSION
           value: production

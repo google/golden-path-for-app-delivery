@@ -3,9 +3,9 @@ kind: Config
 build:
   artifacts:
     - image: test-image
-      context: .
+      context: ..
       docker:
-        dockerfile: hack/test-image/Dockerfile
+        dockerfile: test-image/Dockerfile
 test:
   # Unit tests, remotely vis Cloud Build
   - image: sample-app-backend-dev
@@ -13,5 +13,5 @@ test:
     - command: docker run $IMAGE go test
   - image: test-image
     custom:
-    - command: docker run $IMAGE ./hack/validate.sh
+    - command: docker run $IMAGE ./test-image/validate.sh
   

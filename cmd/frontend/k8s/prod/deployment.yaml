@@ -19,5 +19,5 @@ spec:
           value: production
         resources:
           limits:
-            memory: "1024Mi"
-            cpu: "1000m"
+            memory: "512Mi"
+            cpu: "500m"

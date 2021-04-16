@@ -1,6 +1,6 @@
 apiVersion: skaffold/v2beta13
 kind: Config
 requires:
-- path: skaffold-test.yaml
+- path: test-image/skaffold-test.yaml
 - path: cmd/backend/skaffold.yaml
 - path: cmd/frontend/skaffold.yaml
