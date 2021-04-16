@@ -2,10 +2,10 @@ apiVersion: skaffold/v2beta13
 kind: Config
 metadata:
   name: backend
+requires:
+  - path: ../../base-image
 build:
   artifacts:
-  - image: base
-    context: ../../base-image
   - image: sample-app-backend-dev
     requires:
     - alias: BASE

@@ -1,0 +1,8 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+metadata:
+  name: base
+build:
+  artifacts:
+  - image: base
+  
