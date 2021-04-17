@@ -27,32 +27,24 @@
 	  <td>{{.Name}}</td>
 	</tr>
 	<tr>
-	  <td>Version</td>
-	  <td>{{.Version}}</td>
+	  <td>Cluster Name</td>
+	  <td>{{.ClusterName}}</td>
 	</tr>
 	<tr>
-	  <td>Instance ID</td>
-	  <td>{{.ID}}</td>
+	  <td>Namespace</td>
+	  <td>{{.Namespace}}</td>
 	</tr>
 	<tr>
-	  <td>Hostname</td>
-	  <td>{{.Hostname}}</td>
+	  <td>Host IP</td>
+	  <td>{{.HostIP}}</td>
 	</tr>
 	<tr>
-	  <td>Zone</td>
-	  <td>{{.Zone}}</td>
+	  <td>Pod IP</td>
+	  <td>{{.PodIP}}</td>
 	</tr>
 	<tr>
-	  <td>Project</td>
-	  <td>{{.Project}}</td>
-	</tr>
-	<tr>
-	  <td>Internal IP</td>
-	  <td>{{.InternalIP}}</td>
-	</tr>
-	<tr>
-	  <td>External IP</td>
-	  <td>{{.ExternalIP}}</td>
+	  <td>Start Time</td>
+	  <td>{{.StartTime}}</td>
 	</tr>
   </tbody>
 </table>
@@ -67,12 +59,8 @@
 <table class="bordered">
   <tbody>
 	<tr>
-	  <td>Request Headers</td>
-	  <td><pre>{{.LBRequest}}</pre></td>
-	</tr>
-	<tr>
-		<td>Error</td>
-		<td>{{.Error}}</td>
+	  <td>Raw Request</td>
+	  <td><pre>{{.RawRequest}}</pre></td>
 	</tr>
 </tbody>
 </table>

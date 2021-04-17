@@ -44,13 +44,13 @@ func handleIndex(c *gin.Context) {
 		c.String(http.StatusInternalServerError, "Unable to read body from backend request:\n%v", err)
 		return
 	}
-	var i InstanceMetadata
-	err = json.Unmarshal([]byte(body), &i)
+	var p PodMetadata
+	err = json.Unmarshal([]byte(body), &p)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Unable to parse JSON from backend request:\n%v", err)
 		return
 	}
-	c.HTML(http.StatusOK, "index.html", i)
+	c.HTML(http.StatusOK, "index.html", p)
 }
 
 func handleVersion(c *gin.Context) {
@@ -61,17 +61,13 @@ func handleHealthz(c *gin.Context) {
 	c.String(http.StatusOK, "", "")
 }
 
-// InstanceMetadata stores info about the instance this code is running on.
-type InstanceMetadata struct {
-	ID         string
-	Name       string
-	Version    string
-	Hostname   string
-	Zone       string
-	Project    string
-	InternalIP string
-	ExternalIP string
-	LBRequest  string
-	ClientIP   string
-	Error      string
+// PodMetadata represents info about an InstanceMetadata in GCE
+type PodMetadata struct {
+	Name        string
+	ClusterName string
+	Namespace   string
+	HostIP      string
+	PodIP       string
+	StartTime   string
+	RawRequest  string
 }

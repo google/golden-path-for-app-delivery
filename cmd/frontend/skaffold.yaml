@@ -24,5 +24,6 @@ profiles:
 portForward:
   - resourceType: service
     resourceName: gceme-frontend
+    namespace: default
     port: 80
     localPort: 8080

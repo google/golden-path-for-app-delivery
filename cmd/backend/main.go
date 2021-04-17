@@ -28,11 +28,15 @@ func main() {
 
 func handleIndex(c *gin.Context) {
 	log.Printf("Received request from %s at %s", c.Request.RemoteAddr, c.Request.URL.EscapedPath())
-	i := InstanceMetadata{}
-	i.Populate(version)
+	p := PodMetadata{}
+	err := p.Populate(version)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "%v", err)
+		return
+	}
 	raw, _ := httputil.DumpRequest(c.Request, true)
-	i.LBRequest = string(raw)
-	c.JSON(http.StatusOK, i)
+	p.RawRequest = string(raw)
+	c.JSON(http.StatusOK, p)
 }
 
 func handleVersion(c *gin.Context) {
