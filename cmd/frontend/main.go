@@ -97,11 +97,10 @@ func handleHealthz(c *gin.Context) {
 
 // PodMetadata represents info about an InstanceMetadata in GCE
 type PodMetadata struct {
-	Name        string
-	ClusterName string
-	Namespace   string
-	HostIP      string
-	PodIP       string
-	StartTime   string
-	RawRequest  string
+	Name       string
+	Namespace  string
+	HostIP     string
+	PodIP      string
+	StartTime  string
+	RawRequest string
 }

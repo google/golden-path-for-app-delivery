@@ -14,13 +14,12 @@ import (
 
 // PodMetadata represents info about an InstanceMetadata in GCE
 type PodMetadata struct {
-	Name        string
-	ClusterName string
-	Namespace   string
-	HostIP      string
-	PodIP       string
-	StartTime   string
-	RawRequest  string
+	Name       string
+	Namespace  string
+	HostIP     string
+	PodIP      string
+	StartTime  string
+	RawRequest string
 }
 
 // Populate creates a new instance with info filled out
@@ -41,7 +40,6 @@ func (p *PodMetadata) Populate(version string) error {
 		return fmt.Errorf("unable to find pod %s: %v", hostname, err)
 	}
 	p.Name = pod.Name
-	p.ClusterName = pod.ClusterName
 	p.HostIP = pod.Status.HostIP
 	p.Namespace = pod.Namespace
 	p.PodIP = pod.Status.PodIP
