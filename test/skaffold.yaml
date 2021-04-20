@@ -1,5 +1,7 @@
 apiVersion: skaffold/v2beta13
 kind: Config
+metadata:
+  name: test
 build:
   artifacts:
     - image: test-image
@@ -13,5 +15,5 @@ test:
     - command: docker run $IMAGE go test
   - image: test-image
     custom:
-    - command: docker run $IMAGE ./validate.sh
+    - command: docker run --entrypoint bash $IMAGE ./validate.sh
   

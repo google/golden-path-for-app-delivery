@@ -1,5 +1,7 @@
 apiVersion: skaffold/v2beta13
 kind: Config
+metadata:
+  name: full-stack
 requires:
 - path: test/
 - path: backend/

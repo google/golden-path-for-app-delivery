@@ -4,6 +4,7 @@ metadata:
   name: frontend
 requires:
   - path: ../base-image
+  - path: ../test
   - path: ../backend
 build:
   artifacts:

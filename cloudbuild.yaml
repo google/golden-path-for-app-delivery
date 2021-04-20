@@ -1,19 +1,39 @@
+options:
+  machineType: 'N1_HIGHCPU_8'
 steps:
-- name: 'gcr.io/cloud-builders/go'
-  id: 'test-backend'
-  waitFor: ['-']
+- name: 'gcr.io/k8s-skaffold/skaffold:v1.22.0'
   entrypoint: 'sh'
   args:
+  - -xe
   - -c
   - |
-    cd cmd/backend
-    go test
-- name: 'gcr.io/cloud-builders/go'
-  id: 'test-frontend'
-  waitFor: ['-']
+    export SKAFFOLD_DEFAULT_REPO=gcr.io/$PROJECT_ID
+    skaffold build --file-output=/workspace/artifacts.json
+    skaffold test --build-artifacts=/workspace/artifacts.json
+- name: 'gcr.io/k8s-skaffold/skaffold:v1.22.0'
   entrypoint: 'sh'
   args:
+  - -xe
   - -c
   - |
-    cd cmd/frontend
-    go test
+    cd frontend
+    export SKAFFOLD_DEFAULT_REPO=gcr.io/$PROJECT_ID
+    skaffold render -p prod \
+                    --build-artifacts=/workspace/artifacts.json \
+                    -d gcr.io/$PROJECT_ID \
+                    --output /workspace/prod.yaml
+- name: 'gcr.io/k8s-skaffold/skaffold:v1.22.0'
+  entrypoint: 'sh'
+  args:
+  - -xe
+  - -c
+  - |
+    gcloud container clusters get-credentials default --region us-west2 --project vicnastea
+    export SKAFFOLD_DEFAULT_REPO=gcr.io/$PROJECT_ID
+    skaffold apply /workspace/prod.yaml
+artifacts:
+  objects:
+    location: 'gs://vicnastea-gceme-artifacts/'
+    paths:
+    - '/workspace/artifacts.json'
+    - '/workspace/prod.yaml'
