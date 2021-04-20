@@ -5,7 +5,7 @@ build:
     - image: test-image
       context: ..
       docker:
-        dockerfile: test-image/Dockerfile
+        dockerfile: test/Dockerfile
 test:
   # Unit tests, remotely vis Cloud Build
   - image: sample-app-backend-dev
@@ -13,5 +13,5 @@ test:
     - command: docker run $IMAGE go test
   - image: test-image
     custom:
-    - command: docker run $IMAGE ./test-image/validate.sh
+    - command: docker run $IMAGE ./validate.sh
   

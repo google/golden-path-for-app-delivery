@@ -3,7 +3,7 @@ kind: Config
 metadata:
   name: backend
 requires:
-  - path: ../../base-image
+  - path: ../base-image
 build:
   artifacts:
   - image: sample-app-backend-dev
