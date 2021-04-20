@@ -4,6 +4,7 @@ metadata:
   name: backend
 requires:
   - path: ../base-image
+  - path: ../test
 build:
   artifacts:
   - image: sample-app-backend-dev
