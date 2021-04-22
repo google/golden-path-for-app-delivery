@@ -8,7 +8,7 @@ requires:
   - path: ../backend
 build:
   artifacts:
-  - image: sample-app-frontend-dev
+  - image: sample-app-frontend
     requires:
       - alias: BASE
         image: base

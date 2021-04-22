@@ -7,7 +7,7 @@ requires:
   - path: ../test
 build:
   artifacts:
-  - image: sample-app-backend-dev
+  - image: sample-app-backend
     requires:
     - alias: BASE
       image: base

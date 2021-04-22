@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: sample-app-frontend-dev
+        image: sample-app-frontend
         imagePullPolicy: IfNotPresent
         env:
         - name: VERSION

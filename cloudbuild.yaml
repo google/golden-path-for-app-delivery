@@ -1,5 +1,6 @@
-options:
-  machineType: 'N1_HIGHCPU_8'
+substitutions:
+  _CLUSTER_NAME: default
+  _REGION: us-west2
 steps:
 - name: 'gcr.io/k8s-skaffold/skaffold:v1.22.0'
   entrypoint: 'sh'
@@ -7,8 +8,8 @@ steps:
   - -xe
   - -c
   - |
-    export SKAFFOLD_DEFAULT_REPO=gcr.io/$PROJECT_ID
-    skaffold build --file-output=/workspace/artifacts.json
+    skaffold build --file-output=/workspace/artifacts.json --default-repo gcr.io/$PROJECT_ID
+    cat artifacts.json
     skaffold test --build-artifacts=/workspace/artifacts.json
 - name: 'gcr.io/k8s-skaffold/skaffold:v1.22.0'
   entrypoint: 'sh'
@@ -17,10 +18,9 @@ steps:
   - -c
   - |
     cd frontend
-    export SKAFFOLD_DEFAULT_REPO=gcr.io/$PROJECT_ID
-    skaffold render -p prod \
+    skaffold render --profile prod \
                     --build-artifacts=/workspace/artifacts.json \
-                    -d gcr.io/$PROJECT_ID \
+                    --default-repo gcr.io/$PROJECT_ID \
                     --output /workspace/prod.yaml
 - name: 'gcr.io/k8s-skaffold/skaffold:v1.22.0'
   entrypoint: 'sh'
@@ -28,12 +28,17 @@ steps:
   - -xe
   - -c
   - |
-    gcloud container clusters get-credentials default --region us-west2 --project vicnastea
-    export SKAFFOLD_DEFAULT_REPO=gcr.io/$PROJECT_ID
-    skaffold apply /workspace/prod.yaml
+    gcloud container clusters get-credentials $_CLUSTER_NAME --region $_REGION --project $PROJECT_ID
+    cat /workspace/prod.yaml
+    # TODO: Does not work, default repo is getting wiped
+    # skaffold apply /workspace/prod.yaml
+    kubectl apply -f /workspace/prod.yaml --wait --prune --all
 artifacts:
   objects:
-    location: 'gs://vicnastea-gceme-artifacts/'
+    location: 'gs://$PROJECT_ID-gceme-artifacts/'
     paths:
     - '/workspace/artifacts.json'
     - '/workspace/prod.yaml'
+options:
+  machineType: N1_HIGHCPU_8
+timeout: 3600s
