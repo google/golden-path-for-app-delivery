@@ -20,7 +20,7 @@ var backend string
 
 func main() {
 
-	port := ":80"
+	port := ":8080"
 	backend = *flag.String("backend-service", "http://gceme-backend:8080", "hostname of backend server")
 	flag.Parse()
 
