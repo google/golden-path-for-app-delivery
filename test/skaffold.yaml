@@ -10,7 +10,7 @@ build:
         dockerfile: test/Dockerfile
 test:
   # Unit tests, remotely vis Cloud Build
-  - image: sample-app-backend-dev
+  - image: sample-app-backend
     custom:
     - command: docker run $IMAGE go test
   - image: test-image

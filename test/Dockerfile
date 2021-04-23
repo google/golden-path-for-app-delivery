@@ -6,6 +6,6 @@ RUN wget https://github.com/open-policy-agent/conftest/releases/download/v0.23.0
 RUN gcloud -q components install kustomize skaffold kpt
 COPY test/validate.sh validate.sh
 COPY test/policy/* ./policy/
-COPY frontend/k8s/ /src/frontend/k8s/
-COPY backend/k8s/ /src/backend/k8s/
+COPY frontend/k8s/ frontend/k8s/
+COPY backend/k8s/ backend/k8s/
 CMD ["sh"]
