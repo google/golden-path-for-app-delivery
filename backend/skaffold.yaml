@@ -11,6 +11,10 @@ build:
     requires:
     - alias: BASE
       image: base
+test:
+  - image: sample-app-backend
+    custom:
+    - command: docker run $IMAGE go test
 deploy:
   kustomize:
     paths:

@@ -35,7 +35,7 @@ spec:
           periodSeconds: 5
           httpGet:
             path: /healthz
-            port: 80
+            port: 8080
         ports:
         - name: frontend
-          containerPort: 80
+          containerPort: 8080
