@@ -4,12 +4,12 @@ metadata:
   name: test
 build:
   artifacts:
-    - image: test-image
+    - image: validate-image
       context: ..
       docker:
-        dockerfile: test/Dockerfile
+        dockerfile: validate/Dockerfile
 test:
-  - image: test-image
+  - image: validate-image
     custom:
     - command: docker run --entrypoint bash $IMAGE ./validate.sh
   

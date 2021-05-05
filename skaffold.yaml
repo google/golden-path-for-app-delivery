@@ -3,6 +3,6 @@ kind: Config
 metadata:
   name: full-stack
 requires:
-- path: test/
+- path: validate/
 - path: backend/
 - path: frontend/
