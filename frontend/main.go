@@ -75,7 +75,7 @@ func handleIndex(c *gin.Context) {
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Unable to read body from backend request:\n%v", err)
+		c.String(http.StatusInternalServerError, "Unable to read body from    backend request:\n%v", err)
 		return
 	}
 	var p PodMetadata

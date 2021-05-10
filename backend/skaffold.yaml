@@ -4,7 +4,7 @@ metadata:
   name: backend
 requires:
   - path: ../base-image
-  - path: ../validate
+  # - path: ../validate
 build:
   artifacts:
   - image: sample-app-backend
