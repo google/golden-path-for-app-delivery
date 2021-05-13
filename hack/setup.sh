@@ -1,0 +1,1 @@
+ gcloud projects add-iam-policy-binding --member serviceAccount:54902187596@cloudbuild.gserviceaccount.com --role roles/owner vic-e2e-cicd
