@@ -4,7 +4,7 @@ metadata:
   name: backend
 requires:
   - path: ../base-image
-  # - path: ../validate
+  - path: ../validate
 build:
   artifacts:
   - image: sample-app-backend
@@ -28,5 +28,6 @@ profiles:
 portForward:
   - resourceName: gceme-backend
     resourceType: Service
+    namespace: default
     port: 8080
     localPort: 8081

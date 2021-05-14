@@ -4,7 +4,7 @@ metadata:
   name: frontend
 requires:
   - path: ../base-image
-  # - path: ../validate
+  - path: ../validate
   - path: ../backend
 build:
   artifacts:
@@ -26,5 +26,4 @@ portForward:
   - resourceType: service
     resourceName: gceme-frontend
     namespace: default
-    port: 80
-    localPort: 8080
+    port: 8080
