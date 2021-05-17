@@ -4,4 +4,3 @@ metadata:
   name: gceme-frontend
 spec:
   type: LoadBalancer
-

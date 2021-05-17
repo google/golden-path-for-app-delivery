@@ -14,6 +14,10 @@ spec:
     spec:
       containers:
       - name: frontend
+        command:
+          - "/go/src/app/app"
+          - "-backend-service"
+          - "http://gceme-backend-prod:8080"
         env:
         - name: VERSION
           value: production
