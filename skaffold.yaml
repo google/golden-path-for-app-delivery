@@ -5,3 +5,10 @@ metadata:
 requires:
   - path: frontend
   - path: backend
+profiles:
+  - name: prod
+    deploy:
+      kustomize:
+        paths:
+          - frontend/k8s/prod
+          - backend/k8s/prod
