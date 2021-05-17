@@ -5,6 +5,7 @@ metadata:
 build:
   local:
     push: false
+    concurrency: 0
   artifacts:
     - image: base
       context: base-image
