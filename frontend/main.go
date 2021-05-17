@@ -103,4 +103,5 @@ type PodMetadata struct {
 	PodIP      string
 	StartTime  string
 	RawRequest string
+	Counter    string
 }

@@ -12,9 +12,17 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 )
 
 var version = os.Getenv("VERSION")
+var redisUrl = os.Getenv("REDIS_URL")
+var rdb = redis.NewClient(&redis.Options{
+	Addr:     redisUrl,
+	Password: "", // no password set
+	DB:       0,  // use default DB
+})
+var rdbCtx = context.Background()
 
 func main() {
 	port := ":8080"
@@ -23,6 +31,9 @@ func main() {
 
 	r := gin.Default()
 	log.Printf("Backend version: %s\n", version)
+
+
+	rdb.Set(rdbCtx, "counter", "0", 0)
 
 	r.GET("/", handleIndex)
 	r.GET("/version", handleVersion)
@@ -63,7 +74,12 @@ func main() {
 func handleIndex(c *gin.Context) {
 	log.Printf("Received request from %s at %s", c.Request.RemoteAddr, c.Request.URL.EscapedPath())
 	p := PodMetadata{}
-	err := p.Populate(version)
+	counter, err := incrCounter(c)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "%v", err)
+		return
+	}
+	err = p.Populate(version, counter)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "%v", err)
 		return
@@ -71,6 +87,18 @@ func handleIndex(c *gin.Context) {
 	raw, _ := httputil.DumpRequest(c.Request, true)
 	p.RawRequest = string(raw)
 	c.JSON(http.StatusOK, p)
+}
+
+func incrCounter(c *gin.Context) (string, error) {
+	err := rdb.Incr(rdbCtx, "counter").Err()
+	if err != nil {
+		return "", err
+	}
+	val, err := rdb.Get(rdbCtx, "counter").Result()
+	if err != nil {
+		return "", err
+	}
+	return val, nil
 }
 
 func handleVersion(c *gin.Context) {

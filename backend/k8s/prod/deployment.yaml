@@ -22,3 +22,5 @@ spec:
         env:
         - name: VERSION
           value: production
+        - name: REDIS_URL
+          value: 192.168.2.3:6379
