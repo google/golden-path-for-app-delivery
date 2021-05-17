@@ -35,6 +35,7 @@ artifacts:
     location: 'gs://$PROJECT_ID-gceme-artifacts/'
     paths:
     - '/workspace/artifacts.json'
-#options:
+options:
+  machineType: N1_HIGHCPU_32
 #  workerPool: 'projects/vic-e2e-cicd/locations/us-central1/workerPools/default'
 timeout: 3600s
