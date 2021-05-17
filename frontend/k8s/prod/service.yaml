@@ -4,8 +4,4 @@ metadata:
   name: gceme-frontend
 spec:
   type: LoadBalancer
-  ports:
-  - port: 80
-    name: http
-    targetPort: 8080
 
