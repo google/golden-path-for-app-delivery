@@ -1,4 +1,4 @@
 resources:
-- bucket.yaml
+#- bucket.yaml
 - service.yaml
 - deployment.yaml
