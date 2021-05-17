@@ -2,9 +2,25 @@ apiVersion: skaffold/v2beta13
 kind: Config
 metadata:
   name: full-stack
-requires:
-  - path: frontend
-  - path: backend
+build:
+  artifacts:
+    - image: base
+      context: base-image
+    - image: sample-app-frontend
+      context: frontend
+      requires:
+        - alias: BASE
+          image: base
+    - image: sample-app-backend
+      context: backend
+      requires:
+        - alias: BASE
+          image: base
+deploy:
+  kustomize:
+    paths:
+      - frontend/k8s/dev
+      - backend/k8s/dev
 profiles:
   - name: prod
     deploy:
@@ -15,3 +31,13 @@ profiles:
         flags:
           apply:
             - "--prune=true"
+portForward:
+  - resourceType: service
+    resourceName: gceme-frontend
+    namespace: default
+    port: 80
+    localPort: 9000
+  - resourceType: service
+    resourceName: gceme-backend
+    namespace: default
+    port: 8080
