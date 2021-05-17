@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: test
 build:
+  local:
+    push: false
   artifacts:
     - image: validate-image
       context: ..
