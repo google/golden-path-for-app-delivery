@@ -7,8 +7,18 @@ steps:
   - -xe
   - -c
   - |
-    skaffold build --file-output=/workspace/artifacts.json --default-repo gcr.io/$PROJECT_ID
+    # Build but dont push images
+    skaffold build --file-output=/workspace/artifacts.json \
+                   --default-repo gcr.io/$PROJECT_ID \
+                   --push=false
+
+    # Test images
     skaffold test --build-artifacts=/workspace/artifacts.json
+
+    # Push images
+    skaffold build --file-output=/workspace/artifacts.json \
+                   --default-repo gcr.io/$PROJECT_ID \
+                   --push=true
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:debian_component_based'
   entrypoint: 'sh'
   args:
