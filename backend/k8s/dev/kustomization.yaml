@@ -1,4 +1,6 @@
 bases:
   - ../base
+resources:
+  - redis.yaml
 patchesStrategicMerge:
   - deployment.yaml

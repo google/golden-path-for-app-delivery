@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: full-stack
 build:
+  local:
+    push: false
   artifacts:
     - image: base
       context: base-image
@@ -35,9 +37,9 @@ portForward:
   - resourceType: service
     resourceName: gceme-frontend
     namespace: default
-    port: 80
-    localPort: 9000
+    port: 8080
   - resourceType: service
     resourceName: gceme-backend
     namespace: default
     port: 8080
+    localPort: 8081
