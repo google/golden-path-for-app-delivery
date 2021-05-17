@@ -1,5 +1,7 @@
 bases:
   - ../base
+resources:
+  - bucket.yaml
 patchesStrategicMerge:
   - deployment.yaml
 nameSuffix: -prod
