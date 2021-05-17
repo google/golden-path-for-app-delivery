@@ -12,3 +12,6 @@ profiles:
         paths:
           - frontend/k8s/prod
           - backend/k8s/prod
+        flags:
+          apply:
+            - "--prune=true"
