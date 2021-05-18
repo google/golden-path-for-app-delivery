@@ -23,4 +23,4 @@ spec:
         - name: VERSION
           value: production
         - name: REDIS_URL
-          value: 192.168.2.3:6379
+          value: 192.192.0.4:6379

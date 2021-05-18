@@ -1,0 +1,28 @@
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: default
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeAddress
+metadata:
+  name: servicenetworkingconnection
+spec:
+  addressType: INTERNAL
+  location: global
+  purpose: VPC_PEERING
+  prefixLength: 16
+  address: 192.192.0.0
+  networkRef:
+    name: default
+---
+apiVersion: servicenetworking.cnrm.cloud.google.com/v1beta1
+kind: ServiceNetworkingConnection
+metadata:
+  name: servicenetworkingconnection-sample
+spec:
+  networkRef:
+    name: default
+  reservedPeeringRanges:
+    - name: servicenetworkingconnection
+  service: "servicenetworking.googleapis.com"

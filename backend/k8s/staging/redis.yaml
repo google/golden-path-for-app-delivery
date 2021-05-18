@@ -5,5 +5,8 @@ metadata:
 spec:
   displayName: Redis Instance
   region: us-central1
+  authorizedNetworkRef:
+    name: default
   tier: BASIC
   memorySizeGb: 16
+  connectMode: PRIVATE_SERVICE_ACCESS
