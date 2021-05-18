@@ -24,4 +24,4 @@ spec:
         - name: VERSION
           value: dev
         - name: REDIS_URL
-          value: redis:6379
+          value: redis-dev:6379

@@ -23,4 +23,4 @@ spec:
         - name: VERSION
           value: dev
         - name: BACKEND_URL
-          value: http://gceme-backend:8080
+          value: http://gceme-backend-dev:8080

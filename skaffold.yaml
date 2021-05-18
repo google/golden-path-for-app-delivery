@@ -36,11 +36,11 @@ profiles:
             - "--prune=true"
 portForward:
   - resourceType: service
-    resourceName: gceme-frontend
+    resourceName: gceme-frontend-dev
     namespace: default
     port: 8080
   - resourceType: service
-    resourceName: gceme-backend
+    resourceName: gceme-backend-dev
     namespace: default
     port: 8080
     localPort: 8081
