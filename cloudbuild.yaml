@@ -9,7 +9,8 @@ steps:
   - |
     # Build but dont push images
     skaffold build --file-output=/workspace/artifacts.json \
-                   --default-repo gcr.io/$PROJECT_ID
+                   --default-repo gcr.io/$PROJECT_ID \
+                   --push=false
 
     # Test images
     skaffold test --build-artifacts=/workspace/artifacts.json

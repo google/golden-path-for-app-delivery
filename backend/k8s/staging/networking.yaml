@@ -12,7 +12,7 @@ spec:
   location: global
   purpose: VPC_PEERING
   prefixLength: 16
-  address: 192.192.0.0
+  address: 172.30.0.0
   networkRef:
     name: default
 ---
