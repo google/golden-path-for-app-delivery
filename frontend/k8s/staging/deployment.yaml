@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: gceme-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: staging
+  template:
+    metadata:
+      labels:
+        env: staging
+    spec:
+      containers:
+      - name: frontend
+        image: sample-app-frontend
+        env:
+        - name: VERSION
+          value: staging
+        - name: BACKEND_URL
+          value: http://gceme-backend-staging:8080
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"

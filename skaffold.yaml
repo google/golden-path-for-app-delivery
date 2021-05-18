@@ -25,6 +25,15 @@ deploy:
       - frontend/k8s/dev
       - backend/k8s/dev
 profiles:
+  - name: staging
+    deploy:
+      kustomize:
+        paths:
+          - frontend/k8s/staging
+          - backend/k8s/staging
+        flags:
+          apply:
+            - "--prune=true"
   - name: prod
     deploy:
       kustomize:

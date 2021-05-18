@@ -6,7 +6,7 @@ serialPipeline:
  stages:
  - targetId: staging
    profiles:
-   - prod
+   - staging
  - targetId: prod
    profiles:
    - prod
