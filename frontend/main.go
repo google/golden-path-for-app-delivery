@@ -16,12 +16,11 @@ import (
 )
 
 var version = os.Getenv("VERSION")
-var backend string
+var backend = os.Getenv("BACKEND_URL")
 
 func main() {
 
 	port := ":8080"
-	backend = *flag.String("backend-service", "http://gceme-backend:8080", "hostname of backend server")
 	flag.Parse()
 
 	log.Printf("Frontend version: %s\n", version)

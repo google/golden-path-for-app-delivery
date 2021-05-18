@@ -22,3 +22,5 @@ spec:
         env:
         - name: VERSION
           value: dev
+        - name: BACKEND_URL
+          value: http://gceme-backend:8080
