@@ -30,7 +30,7 @@ func main() {
 	flag.Parse()
 
 	r := gin.Default()
-	log.Printf("Godon foods version: %s\n", version)
+	log.Printf("Backend version: %s\n", version)
 
 
 	rdb.Set(rdbCtx, "counter", "0", 0)
