@@ -19,7 +19,7 @@ description: prod
 gkeCluster:
   project: vic-e2e-cicd
   cluster: prod
-  location: us-west2
+  location: us-central1
 ---
 apiVersion: cloudDeploy/beta1
 kind: target
@@ -29,4 +29,4 @@ description: staging
 gkeCluster:
   project: vic-e2e-cicd
   cluster: staging
-  location: us-west2
+  location: us-central1
