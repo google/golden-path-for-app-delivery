@@ -22,7 +22,7 @@ import (
 
 func TestLocal(t *testing.T) {
 	p := PodMetadata{}
-	err := p.Populate("test")
+	err := p.Populate("test", "1")
 	if err == nil {
 		t.Error("Running inside k8s on accident?")
 	}
