@@ -20,6 +20,6 @@ profiles:
       - k8s/prod
 portForward:
   - resourceType: service
-    resourceName: gceme-frontend
+    resourceName: gceme-frontend-dev
     namespace: default
     port: 8080
