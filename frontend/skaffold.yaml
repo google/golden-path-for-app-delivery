@@ -3,15 +3,11 @@ kind: Config
 metadata:
   name: frontend
 requires:
-  - path: ../base-image
   - path: ../validate
   - path: ../backend
 build:
   artifacts:
   - image: sample-app-frontend
-    requires:
-      - alias: BASE
-        image: base
 deploy:
   kustomize:
     paths:

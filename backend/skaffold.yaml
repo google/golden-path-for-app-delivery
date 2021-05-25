@@ -3,14 +3,10 @@ kind: Config
 metadata:
   name: backend
 requires:
-  - path: ../base-image
   - path: ../validate
 build:
   artifacts:
   - image: sample-app-backend
-    requires:
-    - alias: BASE
-      image: base
 test:
   - image: sample-app-backend
     custom:

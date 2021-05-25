@@ -7,18 +7,10 @@ build:
     push: false
     concurrency: 0
   artifacts:
-    - image: base
-      context: base-image
     - image: sample-app-frontend
       context: frontend
-      requires:
-        - alias: BASE
-          image: base
     - image: sample-app-backend
       context: backend
-      requires:
-        - alias: BASE
-          image: base
 deploy:
   kustomize:
     paths:
