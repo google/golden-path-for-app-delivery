@@ -6,7 +6,7 @@
             "request": "launch",
             "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
             "watch": true,
-            "cleanUp": true,
+            "cleanUp": false,
             "portForward": true,
             "imageRegistry": "gcr.io/vic-e2e-cicd",
             "debug": [
