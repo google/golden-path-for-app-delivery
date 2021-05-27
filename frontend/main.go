@@ -80,7 +80,7 @@ func handleIndex(c *gin.Context) {
 	var p PodMetadata
 	err = json.Unmarshal([]byte(body), &p)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Unable to parse JSON AMP REVIEfrom backend request:\n%v", err)
+		c.String(http.StatusInternalServerError, "Unable to parse JSON from backend request:\n%v", err)
 		return
 	}
 	c.HTML(http.StatusOK, "index.html", p)
