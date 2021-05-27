@@ -11,9 +11,9 @@ steps:
     skaffold build --file-output=/workspace/artifacts.json \
                    --default-repo gcr.io/$PROJECT_ID \
                    --push=true
-#
-#    # Test images
-#    skaffold test --build-artifacts=/workspace/artifacts.json
+
+    # Test images
+    skaffold test --build-artifacts=/workspace/artifacts.json
 
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'sh'
