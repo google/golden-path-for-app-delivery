@@ -15,7 +15,7 @@ steps:
     # Test images
     skaffold test --build-artifacts=/workspace/artifacts.json
 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:debian_component_based'
+- name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'sh'
   args:
   - -xe
