@@ -18,10 +18,6 @@ deploy:
     paths:
       - frontend/k8s/dev
       - backend/k8s/dev
-    flags:
-      apply:
-        - "--prune=true"
-        - "--all"
 profiles:
   - name: staging
     deploy:
@@ -29,20 +25,12 @@ profiles:
         paths:
           - frontend/k8s/staging
           - backend/k8s/staging
-        flags:
-          apply:
-            - "--prune=true"
-            - "--all"
   - name: prod
     deploy:
       kustomize:
         paths:
           - frontend/k8s/prod
           - backend/k8s/prod
-        flags:
-          apply:
-            - "--prune=true"
-            - "--all"
 portForward:
   - resourceType: service
     resourceName: gceme-frontend-dev
