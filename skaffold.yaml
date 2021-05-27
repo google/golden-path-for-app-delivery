@@ -26,6 +26,7 @@ profiles:
         flags:
           apply:
             - "--prune=true"
+            - "--all"
   - name: prod
     deploy:
       kustomize:
@@ -35,6 +36,7 @@ profiles:
         flags:
           apply:
             - "--prune=true"
+            - "--all"
 portForward:
   - resourceType: service
     resourceName: gceme-frontend-dev
