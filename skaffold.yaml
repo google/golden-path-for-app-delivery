@@ -18,6 +18,10 @@ deploy:
     paths:
       - frontend/k8s/dev
       - backend/k8s/dev
+    flags:
+      apply:
+        - "--prune=true"
+        - "--all"
 profiles:
   - name: staging
     deploy:
