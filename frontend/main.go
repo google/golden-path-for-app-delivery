@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"flag"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -71,7 +72,12 @@ func handleIndex(c *gin.Context) {
 		c.String(http.StatusInternalServerError, "Request to backend server ()%s failed:\n%v", backend, err)
 		return
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			panic(err)
+		}
+	}(resp.Body)
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "Unable to read body from    backend request:\n%v", err)
