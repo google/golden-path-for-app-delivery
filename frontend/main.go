@@ -86,7 +86,7 @@ func handleIndex(c *gin.Context) {
 	var p PodMetadata
 	err = json.Unmarshal(body, &p)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Unable to parse JSON from backend request:\n%v", err)
+		c.String(http.StatusInternalServerError, "Unable to parse JSON kelsey from backend request:\n%v", err)
 		return
 	}
 	c.HTML(http.StatusOK, "index.html", p)
