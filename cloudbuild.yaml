@@ -21,7 +21,6 @@ steps:
   - -xe
   - -c
   - |
-    gcloud config set api_endpoint_overrides/clouddeploy "https://staging-clouddeploy.sandbox.googleapis.com/"
     gcloud alpha deploy apply --file deploy/pipeline.yaml \
                               --file deploy/staging.yaml \
                               --file deploy/prod.yaml \
