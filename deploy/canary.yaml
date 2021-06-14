@@ -1,0 +1,12 @@
+apiVersion: deploy.cloud.google.com/v1beta1
+kind: Target
+metadata:
+  name: canary
+  annotations: {}
+  labels: {}
+deliveryPipeline: web-app
+description: canary
+gkeCluster:
+  project: vic-e2e-cicd
+  cluster: prod
+  location: us-central1

@@ -12,7 +12,7 @@ serialPipeline:
   - targetId: staging
     profiles:
     - staging
-  - targetId: prod
+  - targetId: canary
     profiles:
     - canary
   - targetId: prod
