@@ -23,6 +23,7 @@ steps:
   - |
     gcloud alpha deploy apply --file deploy/pipeline.yaml \
                               --file deploy/staging.yaml \
+                              --file deploy/canary.yaml \
                               --file deploy/prod.yaml \
                               --region ${_REGION}
     gcloud alpha deploy releases create $SHORT_SHA-$(date +%s) \
