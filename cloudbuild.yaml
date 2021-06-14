@@ -27,6 +27,7 @@ steps:
                               --region ${_REGION}
     gcloud alpha deploy releases create $SHORT_SHA-$(date +%s) \
                         --delivery-pipeline web-app \
+                        --description "$(git log -1  --pretty='%s')" \
                         --region ${_REGION} \
                         --build-artifacts /workspace/artifacts.json
 artifacts:
