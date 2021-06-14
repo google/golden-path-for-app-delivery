@@ -15,12 +15,6 @@ spec:
     spec:
       containers:
       - name: backend
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
         env:
         - name: VERSION
           value: canary
-        - name: REDIS_URL
-          value: 172.30.0.11:6379

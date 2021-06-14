@@ -18,9 +18,3 @@ spec:
         env:
         - name: VERSION
           value: canary
-        - name: BACKEND_URL
-          value: http://gceme-backend-canary:8080
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
