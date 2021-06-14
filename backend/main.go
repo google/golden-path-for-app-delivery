@@ -32,7 +32,6 @@ func main() {
 	r := gin.Default()
 	log.Printf("Backend version: %s\n", version)
 
-
 	rdb.Set(rdbCtx, "counter", "0", 0)
 
 	r.GET("/", handleIndex)
