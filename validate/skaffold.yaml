@@ -12,4 +12,3 @@ test:
   - image: validate-image
     custom:
     - command: docker run --entrypoint bash $IMAGE ./validate.sh
-  
