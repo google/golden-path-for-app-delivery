@@ -1,7 +1,8 @@
-bases:
-  - ../base
 resources:
-  - redis.yaml
+- ../base/deployments
+- ../base/services
+- ../base/rbac
+- redis.yaml
 patchesStrategicMerge:
   - deployment.yaml
 nameSuffix: -staging

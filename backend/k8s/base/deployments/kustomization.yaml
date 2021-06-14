@@ -1,4 +1,2 @@
 resources:
-- service.yaml
 - deployment.yaml
-- rbac.yaml
