@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: gceme-frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       env: canary
@@ -18,3 +18,9 @@ spec:
         env:
         - name: VERSION
           value: canary
+        - name: BACKEND_URL
+          value: http://gceme-backend-prod:8080
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
