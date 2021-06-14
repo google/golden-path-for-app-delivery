@@ -1,7 +1,7 @@
 substitutions:
   _REGION: us-central1
 steps:
-- name: 'gcr.io/k8s-skaffold/skaffold:v1.24.0'
+- name: 'gcr.io/k8s-skaffold/skaffold'
   entrypoint: 'sh'
   args:
   - -xe
