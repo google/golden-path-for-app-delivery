@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gceme-frontend
+  annotations:
+    kubernetes.io/ingress.class: "gce-internal"
+spec:
+  defaultBackend:
+    service:
+      name: gceme-frontend-prod
+      port:
+        number: 8080
