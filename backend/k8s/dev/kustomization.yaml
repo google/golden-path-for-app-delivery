@@ -2,8 +2,7 @@ resources:
 - ../base/deployments
 - ../base/services
 - ../base/rbac
-resources:
-  - redis.yaml
+- redis.yaml
 patchesStrategicMerge:
   - deployment.yaml
 nameSuffix: -dev
