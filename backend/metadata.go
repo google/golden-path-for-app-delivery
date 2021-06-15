@@ -21,10 +21,11 @@ type PodMetadata struct {
 	StartTime  string
 	RawRequest string
 	Counter    string
+	Color      string
 }
 
 // Populate creates a new instance with info filled out
-func (p *PodMetadata) Populate(version string, counter string) error {
+func (p *PodMetadata) Populate(version string, counter string, color string) error {
 	hostname := os.Getenv("HOSTNAME")
 	config, err := rest.InClusterConfig()
 	if err != nil {
@@ -46,6 +47,7 @@ func (p *PodMetadata) Populate(version string, counter string) error {
 	p.PodIP = pod.Status.PodIP
 	p.StartTime = pod.Status.StartTime.String()
 	p.Counter = counter
+	p.Color = color
 	return nil
 }
 

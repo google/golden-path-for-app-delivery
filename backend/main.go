@@ -15,6 +15,7 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
+var color = "red"
 var version = os.Getenv("VERSION")
 var redisUrl = os.Getenv("REDIS_URL")
 var rdb = redis.NewClient(&redis.Options{
@@ -78,7 +79,7 @@ func handleIndex(c *gin.Context) {
 		c.String(http.StatusInternalServerError, "%v", err)
 		return
 	}
-	err = p.Populate(version, counter)
+	err = p.Populate(version, counter, color)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "%v", err)
 		return

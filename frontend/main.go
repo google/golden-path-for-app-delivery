@@ -115,4 +115,5 @@ type PodMetadata struct {
 	StartTime  string
 	RawRequest string
 	Counter    string
+	Color      string
 }
