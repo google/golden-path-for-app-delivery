@@ -3,5 +3,4 @@ bases:
 - ../base/services
 patchesStrategicMerge:
   - deployment.yaml
-  - service.yaml
 nameSuffix: -prod

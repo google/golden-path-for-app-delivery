@@ -2,8 +2,10 @@ kind: Service
 apiVersion: v1
 metadata:
   name: gceme-frontend
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - name: http
     port: 8080
