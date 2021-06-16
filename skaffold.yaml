@@ -36,11 +36,6 @@ profiles:
         paths:
           - frontend/k8s/prod
           - backend/k8s/prod
-        # Remove the canary when prod rolls out
-        flags:
-          apply:
-          - "--prune"
-          -  "-l app=gceme"
 portForward:
   - resourceType: service
     resourceName: gceme-frontend-dev
