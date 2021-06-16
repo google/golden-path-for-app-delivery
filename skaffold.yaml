@@ -40,7 +40,7 @@ profiles:
         flags:
           apply:
           - "--prune"
-          -  "--all"
+          -  "-l app=gceme"
 portForward:
   - resourceType: service
     resourceName: gceme-frontend-dev
