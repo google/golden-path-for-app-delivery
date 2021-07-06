@@ -1,5 +1,0 @@
-resources:
-- ../base/deployments
-patchesStrategicMerge:
-- deployment.yaml
-nameSuffix: -canary

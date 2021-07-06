@@ -1,8 +1,0 @@
-bases:
-- ../base/deployments
-- ../base/services
-resources:
-- ingress.yaml
-patchesStrategicMerge:
-  - deployment.yaml
-nameSuffix: -staging

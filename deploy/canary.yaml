@@ -4,9 +4,8 @@ metadata:
   name: canary
   annotations: {}
   labels: {}
-deliveryPipeline: web-app
 description: canary
 gkeCluster:
-  project: vic-e2e-cicd
+  project: vic-e2e-bootstrap-3
   cluster: prod
   location: us-central1

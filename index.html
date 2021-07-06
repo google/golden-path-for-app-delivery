@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<title>Frontend Web Server</title>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="col s2">&nbsp;</div>
+<div class="col s8">
+
+
+<div class="card {{.Color}}" class="color">
+<div class="card-content white-text">
+<div class="card-title">Backend that serviced this request</div>
+</div>
+<div class="card-content white">
+<table class="bordered">
+  <tbody>
+    <tr>
+	  <td>Counter</td>
+	  <td>{{.Counter}}</td>
+	</tr>
+	<tr>
+	  <td>Name</td>
+	  <td>{{.Name}}</td>
+	</tr>
+	<tr>
+	  <td>Namespace</td>
+	  <td>{{.Namespace}}</td>
+	</tr>
+	<tr>
+	  <td>Host IP</td>
+	  <td>{{.HostIP}}</td>
+	</tr>
+	<tr>
+	  <td>Pod IP</td>
+	  <td>{{.PodIP}}</td>
+	</tr>
+	<tr>
+	  <td>Start Time</td>
+	  <td>{{.StartTime}}</td>
+	</tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+<div class="col s2">&nbsp;</div>
+</div>
+</div>
+</body>
+</html>

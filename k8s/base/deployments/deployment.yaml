@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sample-app
+spec:
+  selector:
+    matchLabels:
+      app: sample-app
+      env: base
+  template:
+    metadata:
+      name: sample-app
+      labels:
+        app: sample-app
+        env: base
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsNonRoot: true
+      containers:
+      - name: sample-app
+        image: sample-app
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        env:
+        - name: VERSION
+          value: base
+        imagePullPolicy: Always
+        readinessProbe:
+          initialDelaySeconds: 2
+          periodSeconds: 5
+          httpGet:
+            path: /healthz
+            port: 8080
+        ports:
+        - name: sample-app
+          containerPort: 8080

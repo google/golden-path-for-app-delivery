@@ -1,12 +1,12 @@
 apiVersion: deploy.cloud.google.com/v1beta1
 kind: DeliveryPipeline
 metadata:
-  name: web-app
+  name: sample-app
   annotations:
     vic.dev/owner: "viglesias@google.com"
   labels:
-    app: web-app
-description: web-app delivery pipeline
+    app: sample-app
+description: sample-app delivery pipeline
 serialPipeline:
   stages:
   - targetId: staging

@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: staging
+  template:
+    metadata:
+      name: sample-app
+      labels:
+        env: staging
+    spec:
+      containers:
+      - name: sample-app
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        env:
+        - name: VERSION
+          value: staging
+        - name: REDIS_URL
+          value: 172.30.0.3:6379

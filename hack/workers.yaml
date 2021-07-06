@@ -1,6 +1,0 @@
-networkConfig:
-    peeredNetwork: projects/vic-e2e-cicd/global/networks/default
-workerConfig:
-    machineType: e2-standard-16
-    diskSizeGb: 200
-    noExternalIp: false
