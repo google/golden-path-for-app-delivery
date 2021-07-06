@@ -2,8 +2,6 @@ apiVersion: skaffold/v2beta13
 kind: Config
 metadata:
   name: full-stack
-requires:
-  - path: validate/
 build:
   local:
     concurrency: 0
@@ -14,6 +12,10 @@ deploy:
   kustomize:
     paths:
       - k8s/dev/
+portForward:
+- resourceType: service
+  resourceName: sample-app-dev
+  port: 8080
 profiles:
   - name: staging
     deploy:
@@ -30,7 +32,4 @@ profiles:
       kustomize:
         paths:
           - k8s/prod/
-portForward:
-  - resourceType: service
-    resourceName: sample-app-dev
-    port: 8080
+
