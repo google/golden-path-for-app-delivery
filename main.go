@@ -120,6 +120,7 @@ type PodMetadata struct {
 	StartTime  string
 	RawRequest string
 	Counter    string
+	Version    string
 	Color      string
 }
 
@@ -146,6 +147,7 @@ func (p *PodMetadata) Populate(version string, counter string, color string) err
 	p.PodIP = pod.Status.PodIP
 	p.StartTime = pod.Status.StartTime.String()
 	p.Counter = counter
+	p.Version = version
 	p.Color = color
 	return nil
 }
