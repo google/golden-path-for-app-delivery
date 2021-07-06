@@ -10,7 +10,8 @@ gcloud services enable sourcerepo.googleapis.com \
                        clouddeploy.googleapis.com \
                        container.googleapis.com \
                        redis.googleapis.com \
-                       cloudresourcemanager.googleapis.com
+                       cloudresourcemanager.googleapis.com \
+                       servicenetworking.googleapis.com
 ```
 
 1. Configure Cloud Build to allow modification of Cloud Deploy delivery pipelines and deploy to GKE:
@@ -64,6 +65,7 @@ gcloud container clusters create prod \
 1. Configure Config Connector:
 
 ```shell
+# https://cloud.google.com/config-connector/docs/how-to/install-upgrade-uninstall
 gcloud iam service-accounts create sample-app-config-connector
 gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
     --member="serviceAccount:sample-app-config-connector@$(gcloud config get-value project).iam.gserviceaccount.com" \
@@ -88,6 +90,35 @@ kubectl annotate namespace default cnrm.cloud.google.com/project-id=$(gcloud con
 kubectl apply -f config-connector.yaml --context gke_$(gcloud config get-value project)_us-central1_prod
 kubectl annotate namespace default cnrm.cloud.google.com/project-id=$(gcloud config get-value project) \
                 --context gke_$(gcloud config get-value project)_us-central1_prod
+# Create default network in both clusters so it can be referenced
+cat > default-network.yaml <<EOF
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: default
+spec:
+  routingMode: REGIONAL
+  autoCreateSubnetworks: true
+EOF
+kubectl apply -f default-network.yaml --context gke_$(gcloud config get-value project)_us-central1_staging
+kubectl apply -f default-network.yaml --context gke_$(gcloud config get-value project)_us-central1_prod
+```
+
+1. Create Private Service Access for Redis:
+```shell
+# https://cloud.google.com/vpc/docs/configure-private-services-access
+gcloud compute addresses create sample-app \
+    --global \
+    --purpose=VPC_PEERING \
+    --prefix-length=16 \
+    --description="Sample App range" \
+    --network=default
+gcloud services vpc-peerings connect \
+    --service=servicenetworking.googleapis.com \
+    --ranges=sample-app \
+    --network=default \
+    --project=$(gcloud config get-value project)
 ```
 
 1. Push your source code to the repo:
