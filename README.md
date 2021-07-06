@@ -8,7 +8,9 @@
 gcloud services enable sourcerepo.googleapis.com \
                        cloudbuild.googleapis.com \
                        clouddeploy.googleapis.com \
-                       container.googleapis.com
+                       container.googleapis.com \
+                       redis.googleapis.com \
+                       cloudresourcemanager.googleapis.com
 ```
 
 1. Configure Cloud Build to allow modification of Cloud Deploy delivery pipelines and deploy to GKE:
@@ -57,6 +59,35 @@ gcloud container clusters create prod \
     --workload-pool=$(gcloud config get-value project).svc.id.goog \
     --enable-stackdriver-kubernetes --region us-central1 \
     --enable-ip-alias
+```
+
+1. Configure Config Connector:
+
+```shell
+gcloud iam service-accounts create sample-app-config-connector
+gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
+    --member="serviceAccount:sample-app-config-connector@$(gcloud config get-value project).iam.gserviceaccount.com" \
+    --role="roles/owner"
+gcloud iam service-accounts add-iam-policy-binding \
+    sample-app-config-connector@$(gcloud config get-value project).iam.gserviceaccount.com \
+    --member="serviceAccount:$(gcloud config get-value project).svc.id.goog[cnrm-system/cnrm-controller-manager]" \
+    --role="roles/iam.workloadIdentityUser"
+
+cat > config-connector.yaml <<EOF
+apiVersion: core.cnrm.cloud.google.com/v1beta1
+kind: ConfigConnector
+metadata:
+  name: configconnector.core.cnrm.cloud.google.com
+spec:
+ mode: cluster
+ googleServiceAccount: "sample-app-config-connector@$(gcloud config get-value project).iam.gserviceaccount.com"
+EOF
+kubectl apply -f config-connector.yaml --context gke_$(gcloud config get-value project)_us-central1_staging
+kubectl annotate namespace default cnrm.cloud.google.com/project-id=$(gcloud config get-value project) \
+                --context gke_$(gcloud config get-value project)_us-central1_staging
+kubectl apply -f config-connector.yaml --context gke_$(gcloud config get-value project)_us-central1_prod
+kubectl annotate namespace default cnrm.cloud.google.com/project-id=$(gcloud config get-value project) \
+                --context gke_$(gcloud config get-value project)_us-central1_prod
 ```
 
 1. Push your source code to the repo:

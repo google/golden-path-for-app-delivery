@@ -10,3 +10,11 @@ spec:
   tier: BASIC
   memorySizeGb: 16
   connectMode: PRIVATE_SERVICE_ACCESS
+---
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeNetwork
+metadata:
+  name: default
+spec:
+  routingMode: REGIONAL
+  autoCreateSubnetworks: true
