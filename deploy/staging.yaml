@@ -1,11 +1,11 @@
 apiVersion: deploy.cloud.google.com/v1beta1
 kind: Target
 metadata:
-  name: prod
+  name: staging
   annotations: {}
   labels: {}
-description: prod
+description: staging
 gkeCluster:
   project: vic-e2e-bootstrap-3
-  cluster: prod
+  cluster: staging
   location: us-central1
