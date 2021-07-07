@@ -1,35 +1,42 @@
-apiVersion: skaffold/v2beta13
+apiVersion: skaffold/v2beta18
 kind: Config
 metadata:
   name: full-stack
 build:
-  local:
-    concurrency: 0
   artifacts:
-    - image: sample-app
-      context: ./
+  - image: sample-app
+    context: ./
+test:
+- image: sample-app
+  custom:
+  - command: go test
+- image: sample-app
+  custom:
+  - command: |
+      docker run -v `pwd`/k8s:/k8s \
+                 -v /var/run/docker.sock:/var/run/docker.sock \
+                 gcr.io/vic-e2e-bootstrap-3/validate-policies:latest
 deploy:
   kustomize:
     paths:
-      - k8s/dev/
+    - k8s/dev/
 portForward:
 - resourceType: service
   resourceName: sample-app-dev
   port: 8080
 profiles:
-  - name: staging
-    deploy:
-      kustomize:
-        paths:
-          - k8s/staging/
-  - name: canary
-    deploy:
-      kustomize:
-        paths:
-        - k8s/canary/
-  - name: prod
-    deploy:
-      kustomize:
-        paths:
-          - k8s/prod/
-
+- name: staging
+  deploy:
+    kustomize:
+      paths:
+      - k8s/staging/
+- name: canary
+  deploy:
+    kustomize:
+      paths:
+      - k8s/canary/
+- name: prod
+  deploy:
+    kustomize:
+      paths:
+      - k8s/prod/

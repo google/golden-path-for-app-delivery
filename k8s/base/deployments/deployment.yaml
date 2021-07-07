@@ -14,9 +14,6 @@ spec:
         app: sample-app
         env: base
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsNonRoot: true
       containers:
       - name: sample-app
         image: sample-app
@@ -30,10 +27,13 @@ spec:
         imagePullPolicy: Always
         readinessProbe:
           initialDelaySeconds: 2
-          periodSeconds: 5
+          periodSeconds: 20
           httpGet:
             path: /healthz
             port: 8080
         ports:
         - name: sample-app
           containerPort: 8080
+      securityContext:
+        runAsUser: 1000
+        runAsNonRoot: true

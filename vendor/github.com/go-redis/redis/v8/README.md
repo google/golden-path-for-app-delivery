@@ -17,6 +17,12 @@
 - [Examples](https://pkg.go.dev/github.com/go-redis/redis/v8?tab=doc#pkg-examples)
 - [RealWorld example app](https://github.com/uptrace/go-treemux-realworld-example-app)
 
+My other projects:
+
+- [Bun](https://bun.uptrace.dev) - fast and simple SQL client for PostgreSQL, MySQL, and SQLite.
+- [treemux](https://github.com/vmihailenco/treemux) - high-speed, flexible, tree-based HTTP router
+  for Go.
+
 ## Ecosystem
 
 - [Redis Mock](https://github.com/go-redis/redismock).
@@ -160,10 +166,3 @@ Lastly, run:
 ```
 go test
 ```
-
-## See also
-
-- [Fast and flexible HTTP router](https://github.com/vmihailenco/treemux)
-- [Golang PostgreSQL ORM](https://github.com/go-pg/pg)
-- [Golang msgpack](https://github.com/vmihailenco/msgpack)
-- [Golang message task queue](https://github.com/vmihailenco/taskq)
