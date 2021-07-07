@@ -20,7 +20,7 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-var color = "green"
+var color = "blue"
 var version = os.Getenv("VERSION")
 var redisUrl = os.Getenv("REDIS_URL")
 var rdb = redis.NewClient(&redis.Options{
