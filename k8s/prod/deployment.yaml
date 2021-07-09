@@ -21,4 +21,4 @@ spec:
             cpu: "250m"
         env:
         - name: VERSION
-          value: production
+          value: prod
