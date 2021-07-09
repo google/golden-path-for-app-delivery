@@ -13,7 +13,7 @@ type RedisInstance struct {
 }
 type Status struct {
 	Host string `json:"host"`
-	Port string  `json:"port"`
+	Port int64  `json:"port"`
 }
 
 func getRedisInstance(redisName string) RedisInstance{
@@ -23,7 +23,7 @@ func getRedisInstance(redisName string) RedisInstance{
 	if err != nil {
 		panic(fmt.Errorf("unable to get token when constructing redis url: %v", err))
 	}
-	redisResourceURL := fmt.Sprintf("https://kubernetes/apis/redis.cnrm.cloud.google.com/v1beta/namespaces/%s/redisinstances/%s", namespace, redisName)
+	redisResourceURL := fmt.Sprintf("https://kubernetes/apis/redis.cnrm.cloud.google.com/v1beta1/namespaces/%s/redisinstances/%s", namespace, redisName)
 	request, err := http.NewRequest("GET", redisResourceURL, nil)
 	if err != nil {
 		panic(fmt.Errorf("unable to create request when constructing redis url: %v", err))
