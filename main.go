@@ -5,9 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/rest"
 	"log"
 	"net/http"
 	"os"
@@ -16,23 +13,26 @@ import (
 	"syscall"
 	"time"
 
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 )
 
 var color = "red"
 var version = os.Getenv("VERSION")
-var redisUrl = os.Getenv("REDIS_URL")
-var rdb = redis.NewClient(&redis.Options{
-	Addr:     redisUrl,
-	Password: "", // no password set
-	DB:       0,  // use default DB
-})
+var rdb = &redis.Client{}
 var rdbCtx = context.Background()
 
 func main() {
 	port := ":8080"
-
+	rdb = redis.NewClient(&redis.Options{
+		Addr:     getRedisURL(),
+		Password: "", // no password set
+		DB:       0,  // use default DB
+	})
 	flag.Parse()
 
 	r := gin.Default()
@@ -108,7 +108,11 @@ func handleVersion(c *gin.Context) {
 }
 
 func handleHealthz(c *gin.Context) {
-	c.String(http.StatusOK, "", "")
+	status := rdb.Ping(rdbCtx)
+
+	if status.Err() == nil {
+		c.String(http.StatusOK, "", "")
+	}
 }
 
 // PodMetadata represents info about an InstanceMetadata in GCE
@@ -122,6 +126,7 @@ type PodMetadata struct {
 	Counter    string
 	Version    string
 	Color      string
+	RedisURL   string
 }
 
 // Populate creates a new instance with info filled out
@@ -149,8 +154,22 @@ func (p *PodMetadata) Populate(version string, counter string, color string) err
 	p.Counter = counter
 	p.Version = version
 	p.Color = color
+	p.RedisURL = rdb.Options().Addr
 	return nil
 }
+
+func getToken() (string, error) {
+	// Fall back to the namespace associated with the service account token, if available
+	if data, err := ioutil.ReadFile("/var/run/secrets/kubernetes.io/serviceaccount/token"); err == nil {
+		if ns := strings.TrimSpace(string(data)); len(ns) > 0 {
+			return ns, nil
+		}
+	}else {
+		return "", err
+	}
+	return "", fmt.Errorf("unable to get token")
+}
+
 
 func getNamespace() string {
 	// Fall back to the namespace associated with the service account token, if available

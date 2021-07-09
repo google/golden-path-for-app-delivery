@@ -22,5 +22,3 @@ spec:
         env:
         - name: VERSION
           value: canary
-        - name: REDIS_URL
-          value: 10.46.0.3:6379
