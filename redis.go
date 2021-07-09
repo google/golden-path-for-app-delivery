@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"encoding/json"
+	"strings"
 )
 
 type RedisInstance struct {
@@ -65,4 +66,16 @@ func getRedisURL() string {
 	default:
 		return "redis:6379"
 	}
+}
+
+func getToken() (string, error) {
+	// Fall back to the namespace associated with the service account token, if available
+	if data, err := ioutil.ReadFile("/var/run/secrets/kubernetes.io/serviceaccount/token"); err == nil {
+		if ns := strings.TrimSpace(string(data)); len(ns) > 0 {
+			return ns, nil
+		}
+	}else {
+		return "", err
+	}
+	return "", fmt.Errorf("unable to get token")
 }

@@ -112,6 +112,9 @@ func handleHealthz(c *gin.Context) {
 
 	if status.Err() == nil {
 		c.String(http.StatusOK, "", "")
+	} else {
+		errorString := fmt.Sprintf("Unable to reach redis at %v", rdb.Options().Addr)
+		c.String(http.StatusInternalServerError, errorString, "")
 	}
 }
 
@@ -157,19 +160,6 @@ func (p *PodMetadata) Populate(version string, counter string, color string) err
 	p.RedisURL = rdb.Options().Addr
 	return nil
 }
-
-func getToken() (string, error) {
-	// Fall back to the namespace associated with the service account token, if available
-	if data, err := ioutil.ReadFile("/var/run/secrets/kubernetes.io/serviceaccount/token"); err == nil {
-		if ns := strings.TrimSpace(string(data)); len(ns) > 0 {
-			return ns, nil
-		}
-	}else {
-		return "", err
-	}
-	return "", fmt.Errorf("unable to get token")
-}
-
 
 func getNamespace() string {
 	// Fall back to the namespace associated with the service account token, if available
