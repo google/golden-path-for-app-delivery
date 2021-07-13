@@ -6,6 +6,5 @@ metadata:
   labels: {}
 description: prod
 gkeCluster:
-  project: vic-e2e-bootstrap-3
   cluster: prod
   location: us-central1

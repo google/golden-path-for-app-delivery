@@ -6,6 +6,5 @@ metadata:
   labels: {}
 description: staging
 gkeCluster:
-  project: vic-e2e-bootstrap-3
   cluster: staging
   location: us-central1
