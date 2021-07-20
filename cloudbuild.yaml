@@ -15,7 +15,7 @@ steps:
     # Test images
     skaffold test --build-artifacts=/workspace/artifacts.json
 
-- name: 'google/cloud-sdk:latest'
+- name: 'gcr.io/k8s-skaffold/skaffold'
   entrypoint: 'sh'
   args:
   - -xe
