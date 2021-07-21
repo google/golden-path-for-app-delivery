@@ -1,0 +1,57 @@
+steps:
+- name: 'gcr.io/k8s-skaffold/skaffold'
+  entrypoint: 'sh'
+  args:
+  - -xe
+  - -c
+  - |
+    # Build and push images
+    skaffold build --file-output=/workspace/artifacts.json \
+                   --default-repo gcr.io/$PROJECT_ID \
+                   --push=true
+
+    # Test images
+    skaffold test --build-artifacts=/workspace/artifacts.json
+- name: 'gcr.io/k8s-skaffold/skaffold'
+  entrypoint: bash
+  args:
+  - -xeuc
+  - |
+    # https://github.com/kind-ci/examples/blob/master/gcb.md
+    PATH="$${PATH}:$${PWD}/bin"
+
+    {
+      apt-get update -y
+      apt-get install -y socat
+    } >/dev/null
+
+    kindArgs=( create cluster )
+
+    kind "$${kindArgs[@]}"
+
+    KUBECONFIG="$$(mktemp)"
+    kind get kubeconfig > "$$KUBECONFIG"
+    export KUBECONFIG
+
+    startForwarder() {
+      local port
+      # Gets the apiServerPort from the KUBECONFIG file.
+      port="$( awk -F: '/server:/{ print $4 }' "$$KUBECONFIG" )"
+      socat \
+        TCP-LISTEN:${port},reuseaddr,fork \
+        "EXEC:docker run --rm -i --network=host alpine/socat 'STDIO TCP-CONNECT:localhost:${port}'"
+    }
+    startForwarder &
+
+    # Run KinD
+    skaffold deploy --build-artifacts=/workspace/artifacts.json
+    sleep 30
+    kubectl get pods
+artifacts:
+  objects:
+    location: 'gs://$PROJECT_ID-gceme-artifacts/'
+    paths:
+    - '/workspace/artifacts.json'
+options:
+  machineType: E2_HIGHCPU_8
+timeout: 3600s
