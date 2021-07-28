@@ -1,5 +1,3 @@
-substitutions:
-  _REGION: us-central1
 steps:
 - name: 'gcr.io/k8s-skaffold/skaffold'
   entrypoint: 'sh'
@@ -21,14 +19,14 @@ steps:
   - -xe
   - -c
   - |
-    gcloud alpha deploy apply --region ${_REGION} --file deploy/pipeline.yaml
-    gcloud alpha deploy apply --region ${_REGION} --file deploy/staging.yaml
-    gcloud alpha deploy apply --region ${_REGION} --file deploy/canary.yaml
-    gcloud alpha deploy apply --region ${_REGION} --file deploy/prod.yaml
+    gcloud config set deploy/region
+    gcloud alpha deploy apply --file deploy/pipeline.yaml
+    gcloud alpha deploy apply --file deploy/staging.yaml
+    gcloud alpha deploy apply --file deploy/canary.yaml
+    gcloud alpha deploy apply --file deploy/prod.yaml
     gcloud alpha deploy releases create $SHORT_SHA-$(date +%s) \
                         --delivery-pipeline sample-app \
                         --description "$(git log -1  --pretty='%s')" \
-                        --region ${_REGION} \
                         --build-artifacts /workspace/artifacts.json
 artifacts:
   objects:
