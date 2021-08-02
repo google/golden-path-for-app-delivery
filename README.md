@@ -123,7 +123,6 @@ gcloud services vpc-peerings connect \
 
 1. Push your source code to the repo:
 ```shell
-sed -i s/PROJECT_ID/$(gcloud config get-value project)/g deploy/
 git config --global credential.https://source.developers.google.com.helper gcloud.sh
 git remote add google https://source.developers.google.com/p/$(gcloud config get-value project)/r/sample-app
 git push google $(git branch --show-current):master

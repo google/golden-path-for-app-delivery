@@ -7,6 +7,6 @@ metadata:
 description: prod
 requireApproval: true
 gkeCluster:
-  project: vic-e2e-bootstrap-3
+  project: PROJECT_ID
   cluster: prod
   location: us-central1

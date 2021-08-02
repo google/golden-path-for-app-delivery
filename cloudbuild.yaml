@@ -21,6 +21,7 @@ steps:
   - -xe
   - -c
   - |
+    sed -i s/PROJECT_ID/$PROJECT_ID/g deploy/*
     gcloud alpha deploy apply --region ${_REGION} --file deploy/pipeline.yaml
     gcloud alpha deploy apply --region ${_REGION} --file deploy/staging.yaml
     gcloud alpha deploy apply --region ${_REGION} --file deploy/canary.yaml
