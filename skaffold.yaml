@@ -23,7 +23,7 @@ build:
 test:
 - image: sample-app
   custom:
-  - command: go test
+  - command: docker run $IMAGE go test github.com/viglesiasce/sample-app
 - image: sample-app
   custom:
   - command: |

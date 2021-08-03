@@ -19,13 +19,15 @@ RUN useradd -u 1000 -ms  /bin/bash app
 RUN mkdir -p /go/src/app && chown -R app:app /go/src/app
 USER app
 
-# Copy in source files
+# Cache dependencies
 WORKDIR /go/src/app
-COPY vendor/ ./vendor/
-COPY *.go go.* *.html ./
+COPY go.* ./
+RUN go mod download
 
 ENV GOTRACEBACK=all
 ARG SKAFFOLD_GO_GCFLAGS
+# Copy in source files
+COPY *.go *.html ./
 RUN go build -trimpath -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o app
 CMD ["/go/src/app/app"]
 COPY k8s k8s
