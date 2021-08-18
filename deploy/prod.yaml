@@ -19,7 +19,7 @@ metadata:
   annotations: {}
   labels: {}
 description: prod
-requireApproval: true
+requireApproval: false
 gkeCluster:
   project: PROJECT_ID
   cluster: prod
