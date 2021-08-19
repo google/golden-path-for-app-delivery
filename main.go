@@ -35,7 +35,7 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-var color = "blue"
+var color = "red"
 var version = os.Getenv("VERSION")
 var rdb = &redis.Client{}
 var rdbCtx = context.Background()
