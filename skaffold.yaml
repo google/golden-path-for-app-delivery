@@ -24,12 +24,6 @@ test:
 - image: sample-app
   custom:
   - command: docker run $IMAGE go test github.com/viglesiasce/sample-app
-- image: sample-app
-  custom:
-  - command: |
-      docker run -v `pwd`/k8s:/k8s \
-                 -v /var/run/docker.sock:/var/run/docker.sock \
-                 gcr.io/vic-e2e-bootstrap-3/validate-policies:latest
 deploy:
   kustomize:
     paths:
