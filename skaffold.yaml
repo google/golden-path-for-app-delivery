@@ -20,10 +20,6 @@ build:
   artifacts:
   - image: sample-app
     context: ./
-test:
-- image: sample-app
-  custom:
-  - command: docker run $IMAGE go test github.com/viglesiasce/sample-app
 deploy:
   kustomize:
     paths:
