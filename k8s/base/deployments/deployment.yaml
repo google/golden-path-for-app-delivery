@@ -39,6 +39,12 @@ spec:
         - name: VERSION
           value: base
         imagePullPolicy: Always
+        livenessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          httpGet:
+            path: /healthz
+            port: 8080
         readinessProbe:
           initialDelaySeconds: 2
           periodSeconds: 20
