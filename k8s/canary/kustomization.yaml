@@ -15,6 +15,8 @@
 resources:
 - ../base/deployments
 - ../base/rbac
+# include the redis cluster from prod to ensure canary works on first deploy
+- ../prod/redis.yaml
 patchesStrategicMerge:
 - deployment.yaml
 nameSuffix: -canary
