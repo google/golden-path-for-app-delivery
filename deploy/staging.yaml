@@ -19,7 +19,5 @@ metadata:
   annotations: {}
   labels: {}
 description: staging
-gkeCluster:
-  project: PROJECT_ID
-  cluster: staging
-  location: us-central1
+gke:
+  cluster: projects/PROJECT_ID/locations/us-central1/clusters/staging
