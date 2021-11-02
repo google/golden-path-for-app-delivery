@@ -19,6 +19,6 @@ metadata:
   annotations: {}
   labels: {}
 description: prod
-requireApproval: false
+requireApproval: true
 gke:
   cluster: projects/PROJECT_ID/locations/us-central1/clusters/prod
