@@ -16,10 +16,10 @@ package main
 
 import (
 	"crypto/tls"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"encoding/json"
 	"strings"
 )
 
@@ -31,7 +31,7 @@ type Status struct {
 	Port int64  `json:"port"`
 }
 
-func getRedisInstance(redisName string) RedisInstance{
+func getRedisInstance(redisName string) RedisInstance {
 	// If we are not in dev, try to get the redis info from KCC
 	token, err := getToken()
 	namespace := getNamespace()
@@ -64,9 +64,9 @@ func getRedisInstance(redisName string) RedisInstance{
 	return redisInstance
 }
 
-
 func getRedisURL() string {
-	switch version{
+	// Useful for when ConfigConnector is being used
+	/*switch version{
 	case "dev":
 		return "redis-dev:6379"
 	case "staging":
@@ -79,7 +79,8 @@ func getRedisURL() string {
 		return redisUrl
 	default:
 		return "redis:6379"
-	}
+	}*/
+	return "redis:6379"
 }
 
 func getToken() (string, error) {
@@ -88,7 +89,7 @@ func getToken() (string, error) {
 		if ns := strings.TrimSpace(string(data)); len(ns) > 0 {
 			return ns, nil
 		}
-	}else {
+	} else {
 		return "", err
 	}
 	return "", fmt.Errorf("unable to get token")

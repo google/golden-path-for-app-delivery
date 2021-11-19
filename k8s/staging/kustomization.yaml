@@ -19,4 +19,3 @@ resources:
 - redis.yaml
 patchesStrategicMerge:
   - deployment.yaml
-nameSuffix: -staging
