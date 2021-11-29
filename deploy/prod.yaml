@@ -21,4 +21,4 @@ metadata:
 description: prod
 requireApproval: true
 gke:
-  cluster: projects/PROJECT_ID/locations/us-central1/clusters/prod
+  cluster: projects/golden-path-tutorial-00/locations/us-central1/clusters/prod

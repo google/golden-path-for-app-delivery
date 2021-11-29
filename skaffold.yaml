@@ -34,11 +34,6 @@ profiles:
     kustomize:
       paths:
       - k8s/staging/
-- name: canary
-  deploy:
-    kustomize:
-      paths:
-      - k8s/canary/
 - name: prod
   deploy:
     kustomize:

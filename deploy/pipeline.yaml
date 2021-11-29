@@ -24,9 +24,6 @@ serialPipeline:
   - targetId: staging
     profiles:
     - staging
-  - targetId: canary
-    profiles:
-    - canary
   - targetId: prod
     profiles:
     - prod

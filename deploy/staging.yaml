@@ -20,4 +20,4 @@ metadata:
   labels: {}
 description: staging
 gke:
-  cluster: projects/PROJECT_ID/locations/us-central1/clusters/staging
+  cluster: projects/golden-path-tutorial-00/locations/us-central1/clusters/staging
