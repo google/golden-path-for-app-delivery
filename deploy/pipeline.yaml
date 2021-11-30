@@ -15,10 +15,10 @@
 apiVersion: deploy.cloud.google.com/v1beta1
 kind: DeliveryPipeline
 metadata:
-  name: sample-app
+  name: cicd-sample
   labels:
-    app: sample-app
-description: sample-app delivery pipeline
+    app: cicd-sample
+description: cicd-sample delivery pipeline
 serialPipeline:
   stages:
   - targetId: staging

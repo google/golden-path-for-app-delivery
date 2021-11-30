@@ -1,4 +1,4 @@
-module github.com/viglesiasce/sample-app
+module github.com/GoogleCloudPlatform/golden-path-for-app-delivery/cicd-sample
 
 go 1.16
 

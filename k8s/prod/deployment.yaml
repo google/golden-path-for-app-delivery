@@ -15,7 +15,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: sample-app
+  name: cicd-sample
 spec:
   replicas: 2
   selector:
@@ -23,12 +23,12 @@ spec:
       env: production
   template:
     metadata:
-      name: sample-app
+      name: cicd-sample
       labels:
         env: production
     spec:
       containers:
-      - name: sample-app
+      - name: cicd-sample
         resources:
           limits:
             memory: "128Mi"

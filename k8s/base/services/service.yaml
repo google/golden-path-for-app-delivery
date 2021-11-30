@@ -15,7 +15,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: sample-app
+  name: cicd-sample
 spec:
   ports:
   - name: http
@@ -23,4 +23,4 @@ spec:
     targetPort: 8080
     protocol: TCP
   selector:
-    app: sample-app
+    app: cicd-sample
