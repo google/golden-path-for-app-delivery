@@ -20,6 +20,18 @@ build:
   artifacts:
   - image: cicd-sample
     context: ./
+test:
+  - image: cicd-sample
+    custom:
+      - command: ./test.sh
+        timeoutSeconds: 60
+        dependencies:
+          paths:
+          -  "*_test.go"
+          -  "test.sh"
+      - command: echo Hello world!!
+        dependencies:
+          command: echo [\"main_test.go\"]
 deploy:
   kustomize:
     paths:
