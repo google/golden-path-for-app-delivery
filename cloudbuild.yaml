@@ -37,10 +37,10 @@ steps:
   - |
     gcloud config set deploy/region ${_REGION}
     sed -i s/PROJECT_ID/$PROJECT_ID/g deploy/*
-    gcloud alpha deploy apply --file deploy/pipeline.yaml
-    gcloud alpha deploy apply --file deploy/staging.yaml
-    gcloud alpha deploy apply --file deploy/prod.yaml
-    gcloud alpha deploy releases create rel-${SHORT_SHA} \
+    gcloud deploy apply --file deploy/pipeline.yaml
+    gcloud deploy apply --file deploy/staging.yaml
+    gcloud deploy apply --file deploy/prod.yaml
+    gcloud deploy releases create rel-${SHORT_SHA} \
                         --delivery-pipeline cicd-sample \
                         --description "$(git log -1  --pretty='%s')" \
                         --build-artifacts /workspace/artifacts.json \
