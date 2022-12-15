@@ -1,12 +1,11 @@
-### TODO:
-* Create project using project factory with APIs enabled and service account provisioned
-* enable APIs in terraform
-* automate variable replacement in main.tf
-* spin up staging and prod clusters in loop
-* make it driven from on main.tf and just git clone down the modules
-
 ### Configure project
 1. `cd ./terraform/configure-project`
+1. `terraform init`
+1. `terraform plan -var="project_id=cicd-tf"`
+1. `terraform apply -var="project_id=cicd-tf"`
+
+### Create terraform service account
+1. `cd ../create-service-account`
 1. `terraform init`
 1. `terraform plan -var="project_id=cicd-tf"`
 1. `terraform apply -var="project_id=cicd-tf"`
