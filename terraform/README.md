@@ -1,3 +1,6 @@
+### TODO:
+* Use svc account to also create GKE clusters
+
 ### Configure project
 1. `cd ./terraform/configure-project`
 1. `terraform init`
@@ -10,7 +13,25 @@
 1. `terraform plan -var="project_id=cicd-tf"`
 1. `terraform apply -var="project_id=cicd-tf"`
 
+### Configure gcloud to use service account to run terraform steps
+1. `cd ..`
+1. `gcloud iam service-accounts keys create tf-svc-credentials.json --iam-account=tf-svc@cicd-tf.iam.gserviceaccount.com`
+1. `export GOOGLE_APPLICATION_CREDENTIALS=$PWD/tf-svc-credentials.json`
+1. `gcloud auth application-default login`
+
 ### GKE Autopilot Steps
+1. `cd ../gke-staging`
+1. `terraform init`
+1. `terraform plan -var="project_id=cicd-tf"`
+1. `terraform apply -var="project_id=cicd-tf"`
+1. `cd ../gke-prod`
+1. `terraform init`
+1. `terraform plan -var="project_id=cicd-tf"`
+1. `terraform apply -var="project_id=cicd-tf"`
+
+
+
+
 1. Download the GKE Autopilot Terraform and update the files to properly configure the staging and prod clusters:
     ```
     cd terraform
