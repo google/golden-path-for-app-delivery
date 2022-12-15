@@ -30,6 +30,8 @@ module "project-services" {
     "sourcerepo.googleapis.com",
     "container.googleapis.com",
     "cloudresourcemanager.googleapis.com",
-    "servicenetworking.googleapis.com"
+    "servicenetworking.googleapis.com",
+    "cloudkms.googleapis.com",
+    "containeranalysis.googleapis.com"
   ]
 }

@@ -40,7 +40,8 @@ module "service_accounts" {
     "${var.project_id}=>roles/serviceusage.serviceUsageViewer",
     "${var.project_id}=>roles/iam.serviceAccountAdmin",
     "${var.project_id}=>roles/iam.serviceAccountUser",
-    "${var.project_id}=>roles/clouddeploy.developer",
+    "${var.project_id}=>roles/pubsub.editor",
+    "${var.project_id}=>roles/clouddeploy.admin",
     "${var.project_id}=>roles/container.admin"
   ]
   display_name  = "Terraform Service Account"
